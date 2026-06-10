@@ -107,11 +107,11 @@
                             </div>
                         </div>
 
-                        <div class="bg-zinc-950 border border-zinc-800/80 p-2.5 rounded-xl mt-2.5 space-y-0.5 shadow-inner">
+                        <div class="bg-zinc-950 border border-zinc-800/80 p-2.5 rounded-xl mt-2.5 space-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
                             <span class="text-[7px] uppercase tracking-wider text-zinc-500 block font-medium">Faturamento de Hoje</span>
                             <div class="flex items-baseline justify-between">
-                                <span class="text-sm font-black text-zinc-100 tracking-tight">R$ 2.480,90</span>
-                                <span class="text-[7px] font-bold text-green-400 bg-green-500/10 px-1.5 py-0.5 rounded-full flex items-center gap-0.5"><i class="fa-solid fa-arrow-trend-up"></i> 14%</span>
+                                <span id="app-faturamento" class="text-sm font-black text-zinc-100 tracking-tight transition-all duration-300">R$ 2.480,90</span>
+                                <span class="text-[7px] font-bold text-green-400 bg-green-500/10 px-1.5 py-0.5 rounded-full flex items-center gap-0.5"><i class="fa-solid fa-arrow-trend-up"></i> LIVE</span>
                             </div>
                         </div>
 
@@ -120,21 +120,24 @@
                                 <span>Avaliações Recentes</span>
                                 <span class="text-green-400 flex items-center gap-1"><span class="w-1 h-1 rounded-full bg-green-500 animate-pulse"></span> Totem QR</span>
                             </div>
-                            <div class="bg-zinc-950/80 border border-zinc-800/60 p-2 rounded-xl space-y-1">
+                            
+                            <div id="app-card-avaliacao" class="bg-zinc-950/80 border border-zinc-800/60 p-2 rounded-xl space-y-1 transition-all duration-500 opacity-100">
                                 <div class="flex justify-between items-center">
-                                    <span class="text-[8px] font-bold text-zinc-300 flex items-center gap-1"><i class="fa-solid fa-utensils text-green-500 text-[6px]"></i> Mesa 07</span>
+                                    <span id="app-rev-origem" class="text-[8px] font-bold text-zinc-300 flex items-center gap-1">
+                                        <i class="fa-solid fa-utensils text-green-500 text-[6px]"></i> Mesa 07
+                                    </span>
                                     <div class="flex gap-0.5 text-[7px] text-amber-400">
                                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                     </div>
                                 </div>
-                                <p class="text-[8px] text-zinc-400 leading-tight italic">"Muito rápido! Escaneei, avaliei e ganhei o desconto."</p>
+                                <p id="app-rev-texto" class="text-[8px] text-zinc-400 leading-tight italic">"Muito rápido! Escaneei, avaliei e ganhei o desconto."</p>
                             </div>
                         </div>
 
                         <div class="bg-zinc-950/40 border border-zinc-800/80 rounded-xl p-2 h-16 flex flex-col justify-between overflow-hidden">
                             <div class="flex justify-between items-center text-[7px] text-zinc-500 font-medium">
                                 <span>PICO DE PEDIDOS / HORA</span>
-                                <span class="text-zinc-400 font-bold">19:30h</span>
+                                <span class="text-zinc-400 font-bold">Ao vivo</span>
                             </div>
                             <svg class="w-full h-8 mt-1" viewBox="0 0 100 30" preserveAspectRatio="none">
                                 <defs>
@@ -332,6 +335,58 @@
             once: true,      
             offset: 100,     
         });
+
+        // ==========================================
+        // MOTOR DE SIMULAÇÃO EM TEMPO REAL DO APP
+        // ==========================================
+
+        // 1. LÓGICA DO FATURAMENTO SUBINDO
+        let faturamentoBase = 2480.90;
+        const elementoFaturamento = document.getElementById('app-faturamento');
+
+        setInterval(() => {
+            // Gera um acréscimo aleatório realista entre R$ 2,50 e R$ 18,50 (simulando bebidas/porções caindo no sistema)
+            const acrescimo = Math.random() * (18.50 - 2.50) + 2.50;
+            faturamentoBase += acrescimo;
+            
+            // Atualiza na tela formatando bonitinho como moeda Real
+            elementoFaturamento.innerText = faturamentoBase.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+        }, 3500); // Roda a cada 3.5 segundos
+
+        // 2. LÓGICA DAS AVALIAÇÕES ROTATIVAS (FEED DE QR CODE)
+        const listaAvaliacoes = [
+            { origem: "Mesa 07", texto: '"Muito rápido! Escaneei, avaliei e ganhei o desconto."' },
+            { origem: "Mesa 14", texto: '"O hambúrguer veio monstro e a nota 5 estrelas já tá dada!"' },
+            { origem: "Delivery", texto: '"Muito prático fazer o pedido pelo site, direto no WhatsApp."' },
+            { origem: "Mesa 02", texto: '"Atendimento top, o painel deles agiliza muito os pedidos."' },
+            { origem: "Balcão", texto: '"Rápido demais pra lançar a nota, virei cliente fixo."' }
+        ];
+        
+        let indiceAtual = 0;
+        const cardAvaliacao = document.getElementById('app-card-avaliacao');
+        const txtOrigem = document.getElementById('app-rev-origem');
+        const txtTexto = document.getElementById('app-rev-texto');
+
+        setInterval(() => {
+            // 1. Dá o sumiço suave (Fade Out)
+            cardAvaliacao.style.opacity = "0";
+            
+            // 2. Espera a animação de sumir terminar para trocar o conteúdo escondido
+            setTimeout(() => {
+                indiceAtual = (indiceAtual + 1) % listaAvaliacoes.length;
+                const proximaAvaliacao = listaAvaliacoes[indiceAtual];
+                
+                txtOrigem.innerHTML = `<i class="fa-solid fa-utensils text-green-500 text-[6px]"></i> ${proximaAvaliacao.origem}`;
+                txtTexto.innerText = proximaAvaliacao.texto;
+                
+                // 3. Reaparece com o texto novo (Fade In)
+                cardAvaliacao.style.opacity = "1";
+            }, 500); // Tempo do fade out
+
+        }, 6000); // Troca de avaliação a cada 6 segundos
     </script>
 </body>
 </html>
