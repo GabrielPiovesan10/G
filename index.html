@@ -163,14 +163,12 @@
             overflow: hidden;
         }
 
-        /* Efeito de brilho tecnológico no hover */
         .card-projeto:hover {
             transform: translateY(-6px);
             box-shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
             border-color: var(--verde-gptech);
         }
 
-        /* Linha superior verde que aparece no hover */
         .card-projeto::before {
             content: '';
             position: absolute;
@@ -259,13 +257,14 @@
         }
 
         /* =========================================
-           CLASSES DE ANIMAÇÃO (TECNOLÓGICA) 
+           CLASSES DE ANIMAÇÃO (LENTA E SUAVE) 
            ========================================= */
         .reveal-blur {
             opacity: 0;
-            filter: blur(10px);
-            transform: translateY(30px) scale(0.98);
-            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            filter: blur(12px); /* Desfoque inicial um pouco maior */
+            transform: translateY(40px) scale(0.96); /* Movimento leve de baixo para cima */
+            /* Aumentei o tempo de 0.8s para 1.5s para o efeito ser perceptível e elegante */
+            transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .reveal-blur.active {
@@ -274,18 +273,21 @@
             transform: translateY(0) scale(1);
         }
 
-        /* Atrasos para cascata (Stagger effect) */
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
-        .delay-4 { transition-delay: 0.4s; }
+        /* Atrasos aumentados para criar uma cascata mais nítida */
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+        .delay-4 { transition-delay: 0.8s; }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
             .hero p { font-size: 16px; }
             .grid-projetos { grid-template-columns: 1fr; }
-            /* Remove delays no mobile para ficar mais rápido */
-            .delay-1, .delay-2, .delay-3, .delay-4 { transition-delay: 0s; }
+            /* Delays reduzidos no mobile para manter a fluidez */
+            .delay-1 { transition-delay: 0.1s; }
+            .delay-2 { transition-delay: 0.2s; }
+            .delay-3 { transition-delay: 0.3s; }
+            .delay-4 { transition-delay: 0.4s; }
         }
     </style>
 </head>
@@ -359,25 +361,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Cria um observador que detecta quando o elemento aparece na tela
             const observerOptions = {
                 root: null,
-                rootMargin: '0px',
-                threshold: 0.15 // Dispara quando 15% do elemento estiver visível
+                // Faz com que a animação só comece quando o elemento estiver um pouco mais acima na tela
+                rootMargin: '0px 0px -50px 0px',
+                // Exige que pelo menos 20% do card esteja visível antes de animar
+                threshold: 0.2 
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Adiciona a classe 'active' para rodar a animação
                         entry.target.classList.add('active');
-                        // Para de observar depois que animou a primeira vez
                         observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            // Seleciona todos os elementos com a classe .reveal-blur e começa a observar
             const elementsToReveal = document.querySelectorAll('.reveal-blur');
             elementsToReveal.forEach(el => observer.observe(el));
         });
