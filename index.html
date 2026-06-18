@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* RESET E VARIÁVEIS */
+        /* RESET E VARIÁVEIS DE COR GP TECH */
         * {
             margin: 0;
             padding: 0;
@@ -19,9 +19,9 @@
 
         :root {
             --bg-principal: #ffffff;
-            --txt-principal: #111827;
+            --txt-principal: #111827; /* Preto para GP Tech */
             --txt-secundario: #4b5563;
-            --verde-gptech: #10b981;
+            --verde-gptech: #10b981; /* Verde moderno da marca */
             --verde-hover: #059669;
             --cinza-claro: #f9fafb;
             --borda: #e5e7eb;
@@ -34,7 +34,7 @@
             overflow-x: hidden;
         }
 
-        /* CONFIGURAÇÕES DE LAYOUT (CONTAINER) */
+        /* LAYOUT PADRÃO (CONTAINER) */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -42,7 +42,7 @@
             padding: 0 24px;
         }
 
-        /* HEADER / NAV */
+        /* HEADER / NAVEGAÇÃO */
         header {
             width: 100%;
             border-bottom: 1px solid var(--borda);
@@ -230,61 +230,131 @@
             border: 1px solid var(--borda);
         }
 
-        /* FOOTER */
-        footer {
+        /* RODAPÉ E CHURRASCARIA DECK EXEMPLE */
+        .footer {
             background-color: var(--cinza-claro);
             border-top: 1px solid var(--borda);
-            padding: 60px 0;
+            padding: 80px 0;
             text-align: center;
         }
 
-        footer h3 {
-            font-size: 24px;
-            font-weight: 700;
+        .footer h3 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
             margin-bottom: 16px;
         }
 
-        footer p {
+        .footer p {
             color: var(--txt-secundario);
             margin-bottom: 32px;
-            font-size: 15px;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 32px auto;
         }
 
-        .copyright {
-            margin-top: 48px;
-            font-size: 13px;
-            color: #9ca3af;
+        /* ========================================
+           FORMAÇÃO DINÂMICA DA ASSINATURA GP TECH
+           ========================================
+        */
+        .animated-brand-wrapper {
+            margin-top: 60px;
+            position: relative;
+            display: inline-block;
         }
 
-        /* =========================================
-           CLASSES DE ANIMAÇÃO (EQUILIBRADA) 
-           ========================================= */
-        .reveal-blur {
+        /* LINHA INICIAL TECNOLÓGICA */
+        .formation-line {
+            width: 100%;
+            height: 2px;
+            background: var(--verde-gptech);
+            border-radius: 2px;
+            /* Estado inicial: invisível e escalada */
             opacity: 0;
-            filter: blur(8px); /* Reduzi o desfoque inicial */
-            transform: translateY(20px) scale(0.98); 
-            /* Tempo ideal: nem muito rápido (0.8s), nem muito lento (1.5s) */
-            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: scaleX(0);
+            transform-origin: center;
+            /* Animação suave para quando for ativado */
+            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            z-index: 1;
         }
 
-        .reveal-blur.active {
+        /* Adicionando um leve brilho tecnológico à linha */
+        .formation-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        /* TEXTO DA MARCA (GP Tech Digital) */
+        .brand-text {
+            display: flex;
+            gap: 6px;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* GP Tech em preto */
+        .brand-text span.gptech {
+            color: var(--txt-principal);
+            /* Estado inicial: invisível e levemente abaixo da linha */
+            opacity: 0;
+            transform: translateY(10px);
+            /* Animação suave para quando for ativado */
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Digital em verde */
+        .brand-text span.digital {
+            color: var(--verde-gptech);
+            /* Estado inicial: invisível e levemente abaixo da linha */
+            opacity: 0;
+            transform: translateY(10px);
+            /* Animação suave para quando for ativado */
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            /* Atraso para criar o efeito de formação após 'GP Tech' */
+            transition-delay: 0.3s;
+        }
+
+        /* ESTADO ATIVADO (Quando o usuário chega nessa parte) */
+        .animated-brand-wrapper.active .formation-line {
             opacity: 1;
-            filter: blur(0);
-            transform: translateY(0) scale(1);
+            transform: scaleX(1);
+        }
+        
+        /* Ativando o brilho da linha */
+        .animated-brand-wrapper.active .formation-line::after {
+            opacity: 1;
         }
 
-        /* Atrasos menores para a cascata ser rápida, mas visível */
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
-        .delay-4 { transition-delay: 0.4s; }
+        .animated-brand-wrapper.active .brand-text span.gptech,
+        .animated-brand-wrapper.active .brand-text span.digital {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
+        /* EFEITO DE FORMAÇÃO - Adicionando leve brilho tecnológico ao texto verde */
+        .animated-brand-wrapper.active span.digital {
+            text-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+        }
+
+        /* RESPONSIVIDADE PARA TELAS MENORES */
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
             .hero p { font-size: 16px; }
             .grid-projetos { grid-template-columns: 1fr; }
-            /* Zera o delay no mobile pra não engasgar a leitura */
-            .delay-1, .delay-2, .delay-3, .delay-4 { transition-delay: 0s; }
+            .footer h3 { font-size: 28px; }
+            .brand-text { font-size: 22px; }
         }
     </style>
 </head>
@@ -293,89 +363,95 @@
     <header>
         <div class="container nav-container">
             <div class="logo">GP Tech<span>Digital</span></div>
-            <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato">Iniciar Projeto</a>
+            <a href="https://wa.me/SEU_NUMERO_AQUI" target="_blank" class="btn-contato">Iniciar Projeto</a>
         </div>
     </header>
 
     <section class="container hero">
-        <span class="hero-tag reveal-blur">Sistemas Digitais Sob Medida</span>
-        <h1 class="reveal-blur delay-1">Desenvolvimento de sites e sistemas digitais inteligentes.</h1>
-        <p class="reveal-blur delay-2">Transformamos ideias em plataformas de alto desempenho, focadas na automação de processos, experiência do usuário e resultados reais para o seu negócio.</p>
-        <div class="reveal-blur delay-3">
-            <a href="#projetos" class="btn-contato" style="padding: 14px 28px; font-size: 16px; display: inline-block;">Conhecer Soluções</a>
-        </div>
+        <span class="hero-tag">Sistemas Digitais Sob Medida</span>
+        <h1>Desenvolvimento de sites e sistemas digitais inteligentes.</h1>
+        <p>Transformamos ideias em plataformas de alto desempenho, focadas na automação de processos, experiência do usuário e resultados reais para o seu negócio.</p>
+        <a href="#projetos" class="btn-contato" style="padding: 14px 28px; font-size: 16px; display: inline-block;">Conhecer Soluções</a>
     </section>
 
     <section class="container projetos-section" id="projetos">
-        <div class="section-header reveal-blur">
+        <div class="section-header">
             <h2>Nossas Soluções</h2>
             <p>Projetos e serviços criados para otimizar rotinas e engajar clientes.</p>
         </div>
 
         <div class="grid-projetos">
             
-            <div class="card-projeto reveal-blur delay-1">
+            <div class="card-projeto">
                 <div class="icon-projeto">⭐</div>
                 <h3>Sistema de Avaliação para Restaurantes</h3>
-                <p>Plataforma web ágil via QR Code que coleta feedbacks reais de clientes, gerando relatórios estratégicos de atendimento e infraestrutura.</p>
+                <p>Plataforma web ágil via QR Code que coleta feedbacks reais de clientes, gerando relatórios estratégicos de atendimento e infraestrutura para a gestão da casa.</p>
                 <span class="badge-tech">Web App / Real-time</span>
             </div>
 
-            <div class="card-projeto reveal-blur delay-2">
+            <div class="card-projeto">
                 <div class="icon-projeto">✓</div>
                 <h3>Checklists e Relatórios Operacionais</h3>
-                <p>Sistemas corporativos focados em auditoria e controle de rotinas, garantindo conformidade, segurança e redução de erros técnicos.</p>
+                <p>Sistemas corporativos focados em auditoria e controle de rotinas, garantindo conformidade, segurança e redução de erros em processos técnicos complexos.</p>
                 <span class="badge-tech">Gestão / Processos</span>
             </div>
 
-            <div class="card-projeto reveal-blur delay-3">
+            <div class="card-projeto">
                 <div class="icon-projeto">📦</div>
                 <h3>Gestão de Estoque Inteligente</h3>
-                <p>Módulos de controle para gerenciamento de entradas, saídas e movimentações de insumos, otimizando o fluxo de caixa.</p>
+                <p>Módulos de controle para gerenciamento de entradas, saídas e movimentações de insumos, otimizando o fluxo de caixa e a cadeia de suprimentos.</p>
                 <span class="badge-tech">Dashboard / BI</span>
             </div>
 
-            <div class="card-projeto reveal-blur delay-4">
+            <div class="card-projeto">
                 <div class="icon-projeto">🎬</div>
-                <h3>Edição de Vídeos Curtos</h3>
-                <p>Produção de vídeos dinâmicos, motion graphics e materiais visuais voltados para marketing digital e retenção nas redes sociais.</p>
+                <h3>Edição de Vídeos Curtos (Reels/TikTok)</h3>
+                <p>Produção de vídeos dinâmicos, motion graphics e materiais visuais voltados para marketing digital, campanhas publicitárias e retenção nas redes sociais.</p>
                 <span class="badge-tech">Marketing / Motion</span>
             </div>
 
         </div>
     </section>
 
-    <footer class="reveal-blur">
+    <footer class="footer">
         <div class="container">
             <h3>Vamos impulsionar o seu negócio?</h3>
-            <p>Entre em contato para desenharmos a arquitetura ideal para o seu próximo projeto.</p>
-            <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato" style="padding: 14px 28px; display: inline-block;">Fale Conosco no WhatsApp</a>
-            <div class="copyright">
-                &copy; 2026 GP Tech Digital. Todos os direitos reservados.
+            <p>Entre em contato para desenharmos a arquitetura ideal para o seu próximo sistema digital. Da ideia ao lançamento, conte com a nossa expertise.</p>
+            <a href="https://wa.me/SEU_NUMERO_AQUI" target="_blank" class="btn-contato" style="padding: 14px 28px; display: inline-block;">Fale Conosco no WhatsApp</a>
+            
+            <div class="animated-brand-wrapper" id="brandFormation">
+                <div class="formation-line"></div>
+                
+                <div class="brand-text">
+                    <span class="gptech">GP Tech</span>
+                    <span class="digital">Digital</span>
+                </div>
             </div>
+
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
-                root: null,
-                // Dispara a animação um pouco antes para o usuário não ficar olhando pro nada
-                rootMargin: '0px 0px -20px 0px',
-                threshold: 0.1 
+                root: null, // Usa a viewport como raiz
+                rootMargin: '0px 0px -50px 0px', // Gatilho dispara um pouco antes de chegar na borda inferior
+                threshold: 0.2 // Dispara quando 20% da seção de assinatura estiver visível
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
+                        // Adiciona a classe 'active', que inicia todas as animações CSS
                         entry.target.classList.add('active');
+                        // Para de observar depois que animou a primeira vez (para não rodar de novo ao subir a tela)
                         observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            const elementsToReveal = document.querySelectorAll('.reveal-blur');
-            elementsToReveal.forEach(el => observer.observe(el));
+            const brandWrapper = document.getElementById('brandFormation');
+            observer.observe(brandWrapper);
         });
     </script>
 </body>
