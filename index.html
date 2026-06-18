@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* RESET E VARIÁVEIS DE COR GP TECH */
+        /* RESET E VARIÁVEIS */
         * {
             margin: 0;
             padding: 0;
@@ -19,9 +19,9 @@
 
         :root {
             --bg-principal: #ffffff;
-            --txt-principal: #111827; /* Preto para GP Tech */
+            --txt-principal: #111827;
             --txt-secundario: #4b5563;
-            --verde-gptech: #10b981; /* Verde moderno da marca */
+            --verde-gptech: #10b981;
             --verde-hover: #059669;
             --cinza-claro: #f9fafb;
             --borda: #e5e7eb;
@@ -34,7 +34,6 @@
             overflow-x: hidden;
         }
 
-        /* LAYOUT PADRÃO (CONTAINER) */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -42,7 +41,7 @@
             padding: 0 24px;
         }
 
-        /* HEADER / NAVEGAÇÃO */
+        /* HEADER / NAV */
         header {
             width: 100%;
             border-bottom: 1px solid var(--borda);
@@ -230,131 +229,125 @@
             border: 1px solid var(--borda);
         }
 
-        /* RODAPÉ E CHURRASCARIA DECK EXEMPLE */
-        .footer {
+        /* FOOTER */
+        footer {
             background-color: var(--cinza-claro);
             border-top: 1px solid var(--borda);
             padding: 80px 0;
             text-align: center;
         }
 
-        .footer h3 {
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -1.5px;
+        footer h3 {
+            font-size: 24px;
+            font-weight: 700;
             margin-bottom: 16px;
         }
 
-        .footer p {
+        footer p {
             color: var(--txt-secundario);
             margin-bottom: 32px;
-            font-size: 16px;
-            max-width: 600px;
-            margin: 0 auto 32px auto;
+            font-size: 15px;
         }
 
-        /* ========================================
-           FORMAÇÃO DINÂMICA DA ASSINATURA GP TECH
-           ========================================
-        */
+        /* =========================================
+           VOLTOU: ANIMAÇÃO DE ROLAGEM (EQUILIBRADA) 
+           ========================================= */
+        .reveal-blur {
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(20px) scale(0.98); 
+            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal-blur.active {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0) scale(1);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        /* =========================================
+           NOVO: EFEITO DE LINHA ESCREVENDO O NOME (SVG)
+           ========================================= */
         .animated-brand-wrapper {
-            margin-top: 60px;
-            position: relative;
-            display: inline-block;
-        }
-
-        /* LINHA INICIAL TECNOLÓGICA */
-        .formation-line {
+            margin-top: 50px;
             width: 100%;
-            height: 2px;
-            background: var(--verde-gptech);
-            border-radius: 2px;
-            /* Estado inicial: invisível e escalada */
-            opacity: 0;
-            transform: scaleX(0);
-            transform-origin: center;
-            /* Animação suave para quando for ativado */
-            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Adicionando um leve brilho tecnológico à linha */
-        .formation-line::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-
-        /* TEXTO DA MARCA (GP Tech Digital) */
-        .brand-text {
+            max-width: 400px;
+            height: 60px;
+            margin-left: auto;
+            margin-right: auto;
             display: flex;
-            gap: 6px;
-            font-size: 28px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand-text-svg {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-top: 10px;
-            position: relative;
-            z-index: 2;
+            font-size: 38px;
+            letter-spacing: -1.5px;
         }
 
-        /* GP Tech em preto */
-        .brand-text span.gptech {
-            color: var(--txt-principal);
-            /* Estado inicial: invisível e levemente abaixo da linha */
-            opacity: 0;
-            transform: translateY(10px);
-            /* Animação suave para quando for ativado */
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        /* Configuração do contorno (Stroke) para o efeito de desenho */
+        .svg-gp, .svg-digital {
+            fill: transparent; /* Começa transparente */
+            stroke-width: 1.2px; /* Espessura da linha que desenha */
+            stroke-dasharray: 800; /* Tamanho do traço */
+            stroke-dashoffset: 800; /* Esconde o traço empurrando ele pra fora */
         }
 
-        /* Digital em verde */
-        .brand-text span.digital {
-            color: var(--verde-gptech);
-            /* Estado inicial: invisível e levemente abaixo da linha */
-            opacity: 0;
-            transform: translateY(10px);
-            /* Animação suave para quando for ativado */
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-            /* Atraso para criar o efeito de formação após 'GP Tech' */
-            transition-delay: 0.3s;
+        .svg-gp {
+            stroke: var(--txt-principal); /* Linha desenhando em preto */
         }
 
-        /* ESTADO ATIVADO (Quando o usuário chega nessa parte) */
-        .animated-brand-wrapper.active .formation-line {
-            opacity: 1;
-            transform: scaleX(1);
-        }
-        
-        /* Ativando o brilho da linha */
-        .animated-brand-wrapper.active .formation-line::after {
-            opacity: 1;
+        .svg-digital {
+            stroke: var(--verde-gptech); /* Linha desenhando em verde */
         }
 
-        .animated-brand-wrapper.active .brand-text span.gptech,
-        .animated-brand-wrapper.active .brand-text span.digital {
-            opacity: 1;
-            transform: translateY(0);
+        /* O que acontece quando chega no rodapé */
+        .animated-brand-wrapper.active .svg-gp {
+            /* Desenha o contorno por 2.5s, e depois de 1.5s começa a preencher de preto */
+            animation: drawOutline 2.5s ease-in-out forwards, fillGP 1s ease-in-out 1.5s forwards;
         }
 
-        /* EFEITO DE FORMAÇÃO - Adicionando leve brilho tecnológico ao texto verde */
-        .animated-brand-wrapper.active span.digital {
-            text-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+        .animated-brand-wrapper.active .svg-digital {
+            /* Digital começa a ser desenhado um pouquinho depois (delay 0.5s) */
+            animation: drawOutline 2.5s ease-in-out 0.5s forwards, fillDigital 1s ease-in-out 2s forwards;
         }
 
-        /* RESPONSIVIDADE PARA TELAS MENORES */
+        /* Animação 1: Escrevendo o contorno */
+        @keyframes drawOutline {
+            0% { stroke-dashoffset: 800; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        /* Animação 2: Preenchendo a cor GP Tech */
+        @keyframes fillGP {
+            100% { 
+                fill: var(--txt-principal); 
+                stroke: transparent; /* Some o contorno pra ficar só a letra sólida */
+            }
+        }
+
+        /* Animação 3: Preenchendo a cor Digital */
+        @keyframes fillDigital {
+            100% { 
+                fill: var(--verde-gptech); 
+                stroke: transparent;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
             .hero p { font-size: 16px; }
             .grid-projetos { grid-template-columns: 1fr; }
-            .footer h3 { font-size: 28px; }
-            .brand-text { font-size: 22px; }
+            .delay-1, .delay-2, .delay-3, .delay-4 { transition-delay: 0s; }
+            .brand-text-svg { font-size: 28px; }
+            .animated-brand-wrapper { height: 40px; }
         }
     </style>
 </head>
@@ -363,69 +356,71 @@
     <header>
         <div class="container nav-container">
             <div class="logo">GP Tech<span>Digital</span></div>
-            <a href="https://wa.me/SEU_NUMERO_AQUI" target="_blank" class="btn-contato">Iniciar Projeto</a>
+            <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato">Iniciar Projeto</a>
         </div>
     </header>
 
     <section class="container hero">
-        <span class="hero-tag">Sistemas Digitais Sob Medida</span>
-        <h1>Desenvolvimento de sites e sistemas digitais inteligentes.</h1>
-        <p>Transformamos ideias em plataformas de alto desempenho, focadas na automação de processos, experiência do usuário e resultados reais para o seu negócio.</p>
-        <a href="#projetos" class="btn-contato" style="padding: 14px 28px; font-size: 16px; display: inline-block;">Conhecer Soluções</a>
+        <span class="hero-tag reveal-blur">Sistemas Digitais Sob Medida</span>
+        <h1 class="reveal-blur delay-1">Desenvolvimento de sites e sistemas digitais inteligentes.</h1>
+        <p class="reveal-blur delay-2">Transformamos ideias em plataformas de alto desempenho, focadas na automação de processos, experiência do usuário e resultados reais para o seu negócio.</p>
+        <div class="reveal-blur delay-3">
+            <a href="#projetos" class="btn-contato" style="padding: 14px 28px; font-size: 16px; display: inline-block;">Conhecer Soluções</a>
+        </div>
     </section>
 
     <section class="container projetos-section" id="projetos">
-        <div class="section-header">
+        <div class="section-header reveal-blur">
             <h2>Nossas Soluções</h2>
             <p>Projetos e serviços criados para otimizar rotinas e engajar clientes.</p>
         </div>
 
         <div class="grid-projetos">
             
-            <div class="card-projeto">
+            <div class="card-projeto reveal-blur delay-1">
                 <div class="icon-projeto">⭐</div>
                 <h3>Sistema de Avaliação para Restaurantes</h3>
-                <p>Plataforma web ágil via QR Code que coleta feedbacks reais de clientes, gerando relatórios estratégicos de atendimento e infraestrutura para a gestão da casa.</p>
+                <p>Plataforma web ágil via QR Code que coleta feedbacks reais de clientes, gerando relatórios estratégicos de atendimento e infraestrutura.</p>
                 <span class="badge-tech">Web App / Real-time</span>
             </div>
 
-            <div class="card-projeto">
+            <div class="card-projeto reveal-blur delay-2">
                 <div class="icon-projeto">✓</div>
                 <h3>Checklists e Relatórios Operacionais</h3>
-                <p>Sistemas corporativos focados em auditoria e controle de rotinas, garantindo conformidade, segurança e redução de erros em processos técnicos complexos.</p>
+                <p>Sistemas corporativos focados em auditoria e controle de rotinas, garantindo conformidade, segurança e redução de erros técnicos.</p>
                 <span class="badge-tech">Gestão / Processos</span>
             </div>
 
-            <div class="card-projeto">
+            <div class="card-projeto reveal-blur delay-3">
                 <div class="icon-projeto">📦</div>
                 <h3>Gestão de Estoque Inteligente</h3>
-                <p>Módulos de controle para gerenciamento de entradas, saídas e movimentações de insumos, otimizando o fluxo de caixa e a cadeia de suprimentos.</p>
+                <p>Módulos de controle para gerenciamento de entradas, saídas e movimentações de insumos, otimizando o fluxo de caixa.</p>
                 <span class="badge-tech">Dashboard / BI</span>
             </div>
 
-            <div class="card-projeto">
+            <div class="card-projeto reveal-blur delay-4">
                 <div class="icon-projeto">🎬</div>
-                <h3>Edição de Vídeos Curtos (Reels/TikTok)</h3>
-                <p>Produção de vídeos dinâmicos, motion graphics e materiais visuais voltados para marketing digital, campanhas publicitárias e retenção nas redes sociais.</p>
+                <h3>Edição de Vídeos Curtos</h3>
+                <p>Produção de vídeos dinâmicos, motion graphics e materiais visuais voltados para marketing digital e retenção nas redes sociais.</p>
                 <span class="badge-tech">Marketing / Motion</span>
             </div>
 
         </div>
     </section>
 
-    <footer class="footer">
+    <footer class="reveal-blur">
         <div class="container">
             <h3>Vamos impulsionar o seu negócio?</h3>
-            <p>Entre em contato para desenharmos a arquitetura ideal para o seu próximo sistema digital. Da ideia ao lançamento, conte com a nossa expertise.</p>
-            <a href="https://wa.me/SEU_NUMERO_AQUI" target="_blank" class="btn-contato" style="padding: 14px 28px; display: inline-block;">Fale Conosco no WhatsApp</a>
+            <p>Entre em contato para desenharmos a arquitetura ideal para o seu próximo projeto.</p>
+            <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato" style="padding: 14px 28px; display: inline-block;">Fale Conosco no WhatsApp</a>
             
             <div class="animated-brand-wrapper" id="brandFormation">
-                <div class="formation-line"></div>
-                
-                <div class="brand-text">
-                    <span class="gptech">GP Tech</span>
-                    <span class="digital">Digital</span>
-                </div>
+                <svg width="100%" height="100%" viewBox="0 0 350 50">
+                    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" class="brand-text-svg">
+                        <tspan class="svg-gp">GP Tech</tspan>
+                        <tspan class="svg-digital" dx="8">Digital</tspan>
+                    </text>
+                </svg>
             </div>
 
         </div>
@@ -433,25 +428,30 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                root: null, // Usa a viewport como raiz
-                rootMargin: '0px 0px -50px 0px', // Gatilho dispara um pouco antes de chegar na borda inferior
-                threshold: 0.2 // Dispara quando 20% da seção de assinatura estiver visível
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            // Observer 1: Para as seções normais (efeito blur)
+            const observerNormal = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Adiciona a classe 'active', que inicia todas as animações CSS
                         entry.target.classList.add('active');
-                        // Para de observar depois que animou a primeira vez (para não rodar de novo ao subir a tela)
                         observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, { rootMargin: '0px 0px -20px 0px', threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-blur').forEach(el => observerNormal.observe(el));
+
+            // Observer 2: Específico para o rodapé SVG
+            const observerSVG = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -20px 0px', threshold: 0.5 }); // Exige que a pessoa role mais pra ver a animação começar
 
             const brandWrapper = document.getElementById('brandFormation');
-            observer.observe(brandWrapper);
+            if(brandWrapper) observerSVG.observe(brandWrapper);
         });
     </script>
 </body>
