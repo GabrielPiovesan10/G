@@ -25,6 +25,7 @@
             --verde-hover: #059669;
             --cinza-claro: #f9fafb;
             --borda: #e5e7eb;
+            --sombra-suave: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         body {
@@ -69,6 +70,11 @@
             font-size: 14px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-contato:hover {
@@ -111,10 +117,11 @@
             margin: 0 auto 40px auto;
         }
 
-        /* SEÇÃO DE PROJETOS */
+        /* SEÇÃO DE IMAGENS FIXAS (GALERIA) */
         .projetos-section {
             padding: 80px 0;
             border-top: 1px solid var(--borda);
+            background-color: var(--cinza-claro);
         }
 
         .section-header {
@@ -138,85 +145,135 @@
 
         .grid-projetos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
         }
 
-        .card-projeto {
+        .fixed-image-card {
             background-color: var(--bg-principal);
             border: 1px solid var(--borda);
             border-radius: 12px;
-            padding: 32px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
             overflow: hidden;
+            position: relative;
+            box-shadow: var(--sombra-suave);
+            transition: all 0.3s ease;
         }
 
-        .card-projeto:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
+        .fixed-image-card:hover {
+            transform: translateY(-4px);
             border-color: var(--verde-gptech);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
         }
 
-        .card-projeto::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .image-container {
             width: 100%;
-            height: 3px;
-            background: var(--verde-gptech);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
+            height: 220px;
+            overflow: hidden;
+            background-color: #e2e8f0;
         }
 
-        .card-projeto:hover::before {
-            transform: scaleX(1);
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .icon-projeto {
-            width: 48px;
-            height: 48px;
-            background-color: var(--cinza-claro);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-            border: 1px solid var(--borda);
-            transition: transform 0.3s ease;
+        .fixed-image-card:hover .image-container img {
+            transform: scale(1.05);
         }
 
-        .card-projeto:hover .icon-projeto {
-            transform: scale(1.1) rotate(5deg);
-            border-color: var(--verde-gptech);
-            color: var(--verde-gptech);
+        .image-card-content {
+            padding: 20px;
         }
 
-        .card-projeto h3 {
-            font-size: 20px;
+        .image-card-content h3 {
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
+            margin-bottom: 6px;
         }
 
-        .card-projeto p {
+        .image-card-content p {
+            font-size: 14px;
             color: var(--txt-secundario);
-            font-size: 15px;
-            margin-bottom: 20px;
         }
 
-        .badge-tech {
-            display: inline-block;
-            background-color: var(--cinza-claro);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--txt-secundario);
+        /* SEÇÃO PERSONALIZAR CONVITE */
+        .convite-section {
+            padding: 80px 0;
+            background-color: var(--bg-principal);
+        }
+
+        .form-card {
+            background-color: #ffffff;
             border: 1px solid var(--borda);
+            border-radius: 16px;
+            padding: 48px;
+            box-shadow: var(--sombra-suave);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--txt-principal);
+        }
+
+        .form-control {
+            padding: 14px 16px;
+            border: 1px solid var(--borda);
+            border-radius: 8px;
+            font-size: 15px;
+            color: var(--txt-principal);
+            background-color: var(--cinza-claro);
+            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--verde-gptech);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input[type="color"].form-control {
+            padding: 4px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        input[type="file"].form-control {
+            padding: 10px 16px;
+            background-color: #ffffff;
+        }
+
+        .form-submit-wrapper {
+            margin-top: 32px;
+            text-align: right;
+            grid-column: span 2;
         }
 
         /* FOOTER */
@@ -245,9 +302,7 @@
             color: #9ca3af;
         }
 
-        /* =========================================
-           ANIMAÇÕES DE ROLAGEM DOS CARDS (BLUR)
-           ========================================= */
+        /* ANIMAÇÕES BLUR */
         .reveal-blur {
             opacity: 0;
             filter: blur(8px);
@@ -266,10 +321,7 @@
         .delay-3 { transition-delay: 0.3s; }
         .delay-4 { transition-delay: 0.4s; }
 
-        /* =========================================
-           EFEITOS DE LINHA ESCREVENDO O NOME (SVG)
-           ========================================= */
-        /* Configuração comum para os traços */
+        /* SVG LOGO EFEITOS */
         .svg-gp, .svg-digital {
             fill: transparent;
             stroke-dasharray: 600; 
@@ -279,7 +331,6 @@
         .svg-gp { stroke: var(--txt-principal); }
         .svg-digital { stroke: var(--verde-gptech); }
 
-        /* HEADER SVG LOGO */
         .header-logo-wrapper {
             width: 200px;
             height: 40px;
@@ -297,7 +348,6 @@
         .header-text-svg .svg-gp { stroke-width: 1px; }
         .header-text-svg .svg-digital { stroke-width: 1px; }
 
-        /* Animação Header: Mais rápida */
         .header-logo-wrapper.active .svg-gp {
             animation: drawOutline 1.5s ease-in-out forwards, fillGP 0.8s ease-in-out 1s forwards;
         }
@@ -305,7 +355,6 @@
             animation: drawOutline 1.5s ease-in-out 0.2s forwards, fillDigital 0.8s ease-in-out 1.2s forwards;
         }
 
-        /* FOOTER SVG LOGO */
         .animated-brand-wrapper {
             margin-top: 50px;
             width: 100%;
@@ -328,7 +377,6 @@
         .brand-text-svg .svg-gp { stroke-width: 1.5px; }
         .brand-text-svg .svg-digital { stroke-width: 1.5px; }
 
-        /* Animação Footer: Mais cadenciada e suave */
         .animated-brand-wrapper.active .svg-gp {
             animation: drawOutline 2.5s ease-in-out forwards, fillGP 1s ease-in-out 1.5s forwards;
         }
@@ -336,16 +384,13 @@
             animation: drawOutline 2.5s ease-in-out 0.5s forwards, fillDigital 1s ease-in-out 2s forwards;
         }
 
-        /* Keyframes das Animações SVG */
         @keyframes drawOutline {
             0% { stroke-dashoffset: 600; }
             100% { stroke-dashoffset: 0; }
         }
-
         @keyframes fillGP {
             100% { fill: var(--txt-principal); stroke: transparent; }
         }
-
         @keyframes fillDigital {
             100% { fill: var(--verde-gptech); stroke: transparent; }
         }
@@ -353,7 +398,10 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
             .hero p { font-size: 16px; }
-            .grid-projetos { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: 1; }
+            .form-submit-wrapper { grid-column: 1; text-align: center; }
+            .form-card { padding: 24px; }
             .delay-1, .delay-2, .delay-3, .delay-4 { transition-delay: 0s; }
             .brand-text-svg { font-size: 28px; }
             .animated-brand-wrapper { height: 40px; margin-top: 40px; }
@@ -375,62 +423,180 @@
                 </svg>
             </div>
             
-            <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato">Iniciar Projeto</a>
+            <a href="#convites" class="btn-contato">Personalizar Convite</a>
         </div>
     </header>
 
     <section class="container hero">
-        <span class="hero-tag reveal-blur">Sistemas Digitais Sob Medida</span>
-        <h1 class="reveal-blur delay-1">Desenvolvimento de sites e sistemas digitais inteligentes.</h1>
-        <p class="reveal-blur delay-2">Transformamos ideias em plataformas de alto desempenho, focadas na automação de processos, experiência do usuário e resultados reais para o seu negócio.</p>
-        <div class="reveal-blur delay-3">
-            <a href="#projetos" class="btn-contato" style="padding: 14px 28px; font-size: 16px; display: inline-block;">Conhecer Soluções</a>
+        <span class="hero-tag reveal-blur">Plataforma de Criação</span>
+        <h1 class="reveal-blur delay-1">Crie experiências visuais e convites inesquecíveis.</h1>
+        <p class="reveal-blur delay-2">Plataforma rápida, moderna e intuitiva para gerenciar seus projetos e criar páginas personalizadas.</p>
+    </section>
+
+    <!-- SEÇÃO: 6 IMAGENS FIXAS NOS CARDS -->
+    <section class="projetos-section" id="imagens">
+        <div class="container">
+            <div class="section-header reveal-blur">
+                <h2>Galeria de Projetos Fixos</h2>
+                <p>Estes cards exibem arquivos de imagem salvos permanentemente na estrutura do seu site. (Basta substituir os nomes dos arquivos nos atributos src abaixo).</p>
+            </div>
+
+            <div class="grid-projetos">
+                
+                <!-- Card 1 -->
+                <div class="fixed-image-card reveal-blur delay-1">
+                    <div class="image-container">
+                        <!-- Altere "img/foto1.jpg" para o caminho da sua imagem real no servidor -->
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Projeto 1">
+                    </div>
+                    <div class="image-card-content">
+                        <h3>Sistema Web 01</h3>
+                        <p>Plataforma corporativa e painel de controle administrativo em tempo real.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="fixed-image-card reveal-blur delay-2">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Projeto 2">
+                    </div>
+                    <div class="image-card-content">
+                        <h3>Dashboard Analítico</h3>
+                        <p>Gráficos dinâmicos para acompanhamento de métricas e desempenho.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="fixed-image-card reveal-blur delay-3">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Projeto 3">
+                    </div>
+                    <div class="image-card-content">
+                        <h3>Equipe & Processos</h3>
+                        <p>Ferramentas integradas para auditoria, checklist e relatórios operacionais.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="fixed-image-card reveal-blur delay-4">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Projeto 4">
+                    </div>
+                    <div class="image-card-content">
+                        <h3>Automação de Estoque</h3>
+                        <p>Controle completo de entradas, saídas e movimentações de insumos.</p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="fixed-image-card reveal-blur delay-1">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Projeto 5">
+                    </div>
+                    <div class="image-card-content">
+                        <h3>App Mobile & QR Code</h3>
+                        <p>Soluções ágeis para captação de feedback e interação com clientes.</p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="fixed-image-card reveal-blur delay-2">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80" alt="Projeto 6">
+                    </div>
+                    <div class="image-card-content">
+                        <h3>Marketing & Motion</h3>
+                        <p>Produção de materiais visuais modernos para alta retenção digital.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <section class="container projetos-section" id="projetos">
-        <div class="section-header reveal-blur">
-            <h2>Nossas Soluções</h2>
-            <p>Projetos e serviços criados para otimizar rotinas e engajar clientes.</p>
-        </div>
-
-        <div class="grid-projetos">
-            
-            <div class="card-projeto reveal-blur delay-1">
-                <div class="icon-projeto">⭐</div>
-                <h3>Sistema de Avaliação para Restaurantes</h3>
-                <p>Plataforma web ágil via QR Code que coleta feedbacks reais de clientes, gerando relatórios estratégicos de atendimento e infraestrutura.</p>
-                <span class="badge-tech">Web App / Real-time</span>
+    <!-- SEÇÃO: PERSONALIZAR CONVITE -->
+    <section class="convite-section" id="convites">
+        <div class="container">
+            <div class="section-header reveal-blur">
+                <h2>Personalize seu Convite</h2>
+                <p>Preencha as informações abaixo para estruturar o seu convite digital exclusivo, com todas as opções completas.</p>
             </div>
 
-            <div class="card-projeto reveal-blur delay-2">
-                <div class="icon-projeto">✓</div>
-                <h3>Checklists e Relatórios Operacionais</h3>
-                <p>Sistemas corporativos focados em auditoria e controle de rotinas, garantindo conformidade, segurança e redução de erros técnicos.</p>
-                <span class="badge-tech">Gestão / Processos</span>
-            </div>
+            <div class="form-card reveal-blur delay-1">
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <div class="form-grid">
+                        
+                        <!-- Nome do Evento -->
+                        <div class="form-group full-width">
+                            <label for="nomeEvento">🎊 Nome do Evento</label>
+                            <input type="text" id="nomeEvento" class="form-control" placeholder="Ex: Casamento da Ana e Rafael, Aniversário de 15 Anos..." required>
+                        </div>
 
-            <div class="card-projeto reveal-blur delay-3">
-                <div class="icon-projeto">📦</div>
-                <h3>Gestão de Estoque Inteligente</h3>
-                <p>Módulos de controle para gerenciamento de entradas, saídas e movimentações de insumos, otimizando o fluxo de caixa.</p>
-                <span class="badge-tech">Dashboard / BI</span>
-            </div>
+                        <!-- Data -->
+                        <div class="form-group">
+                            <label for="dataEvento">📅 Data</label>
+                            <input type="date" id="dataEvento" class="form-control" required>
+                        </div>
 
-            <div class="card-projeto reveal-blur delay-4">
-                <div class="icon-projeto">🎬</div>
-                <h3>Edição de Vídeos Curtos</h3>
-                <p>Produção de vídeos dinâmicos, motion graphics e materiais visuais voltados para marketing digital e retenção nas redes sociais.</p>
-                <span class="badge-tech">Marketing / Motion</span>
-            </div>
+                        <!-- Horário -->
+                        <div class="form-group">
+                            <label for="horaEvento">⏰ Horário</label>
+                            <input type="time" id="horaEvento" class="form-control" required>
+                        </div>
 
+                        <!-- Localização -->
+                        <div class="form-group">
+                            <label for="localEvento">📍 Localização (Endereço ou Link Maps)</label>
+                            <input type="text" id="localEvento" class="form-control" placeholder="Rua das Flores, 123 - Espaço Vida" required>
+                        </div>
+
+                        <!-- Número de Telefone -->
+                        <div class="form-group">
+                            <label for="telefone">📱 Número de Telefone (Confirmação)</label>
+                            <input type="tel" id="telefone" class="form-control" placeholder="(11) 99999-9999" required>
+                        </div>
+
+                        <!-- Cor do Tema -->
+                        <div class="form-group">
+                            <label for="corTema">🎨 Cor Principal do Tema</label>
+                            <input type="color" id="corTema" class="form-control" value="#10b981" title="Escolha a cor do seu convite">
+                        </div>
+
+                        <!-- Música de Fundo -->
+                        <div class="form-group">
+                            <label for="musica">🎵 Música de Fundo (MP3)</label>
+                            <input type="file" id="musica" class="form-control" accept="audio/*">
+                        </div>
+
+                        <!-- Imagens Extras para o Convite -->
+                        <div class="form-group full-width">
+                            <label for="imagemConvite">🖼️ Imagens do Convite</label>
+                            <input type="file" id="imagemConvite" class="form-control" accept="image/*" multiple>
+                        </div>
+
+                        <!-- Informações Adicionais -->
+                        <div class="form-group full-width">
+                            <label for="infoAdicional">📝 Informações Adicionais</label>
+                            <textarea id="infoAdicional" class="form-control" placeholder="Ex: Traje esporte fino, lista de presentes em anexo, estacionamento gratuito no local..."></textarea>
+                        </div>
+
+                        <!-- Botão Submit -->
+                        <div class="form-submit-wrapper">
+                            <button type="submit" class="btn-contato" style="padding: 16px 32px; font-size: 16px; width: 100%; max-width: 300px;">
+                                Gerar Meu Convite 🚀
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
     <footer class="reveal-blur">
         <div class="container">
-            <h3>Vamos impulsionar o seu negócio?</h3>
-            <p>Entre em contato para desenharmos a arquitetura ideal para o seu próximo projeto.</p>
+            <h3>Ficou com alguma dúvida?</h3>
+            <p>Entre em contato conosco pelo WhatsApp para desenharmos a arquitetura ideal do seu evento.</p>
             <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato" style="padding: 14px 28px; display: inline-block;">Fale Conosco no WhatsApp</a>
             
             <div class="animated-brand-wrapper" id="brandFormation">
@@ -445,11 +611,11 @@
             <div class="copyright">
                 &copy; 2026 GP Tech Digital. Todos os direitos reservados.
             </div>
-
         </div>
     </footer>
 
     <script>
+        // Sistema de Observer para as Animações de Scroll
         document.addEventListener('DOMContentLoaded', () => {
             // Observer 1: Para as seções normais (efeito blur) e Header Logo
             const observerNormal = new IntersectionObserver((entries, observer) => {
