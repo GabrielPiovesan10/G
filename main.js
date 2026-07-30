@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (inviteForm) {
         inviteForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Impede o recarregamento da página
 
             // Captura dos dados do formulário
             const tipoEvento = document.getElementById('tipoEvento').value;
@@ -26,10 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const detalhes = document.getElementById('detalhes').value || 'Sem detalhes adicionais';
 
             // Formatação da data (de YYYY-MM-DD para DD/MM/YYYY)
-            const [ano, mes, dia] = data.split('-');
-            const dataFormatada = `${dia}/${mes}/${ano}`;
+            let dataFormatada = 'Não informada';
+            if (data) {
+                const [ano, mes, dia] = data.split('-');
+                dataFormatada = `${dia}/${mes}/${ano}`;
+            }
 
-            // Número do WhatsApp da GP Tech Digital
+            // Número do WhatsApp da GP Tech Digital (DDI + DDD + Número)
             const numeroWhatsApp = '5519993405480';
 
             // Montagem da mensagem formatada
@@ -44,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
                              `*Detalhes Adicionais:*\n${detalhes}\n\n` +
                              `Olá! Gostaria de um orçamento e prosseguir com a criação deste convite.`;
 
-            // Codificação da mensagem para a URL
-            const urlWhatsApp = `https://wa.me/${5519993405480}?text=${encodeURIComponent(mensagem)}`;
+            // Codificação da mensagem para a URL usando a API oficial de envio
+            const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}`;
 
             // Redirecionamento para o WhatsApp em uma nova aba
             window.open(urlWhatsApp, '_blank');
