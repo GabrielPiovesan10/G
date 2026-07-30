@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GP Tech Digital | Desenvolvimento de Sites e Sistemas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,14 +25,21 @@
             --verde-hover: #059669;
             --cinza-claro: #f9fafb;
             --borda: #e5e7eb;
-            --sombra-suave: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --sombra-luxo: 0 20px 40px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0,0,0,0.05);
+            --sombra-suave: 0 4px 20px rgba(0, 0, 0, 0.04);
         }
 
-        body {
+        html, body {
             background-color: var(--bg-principal);
             color: var(--txt-principal);
             line-height: 1.6;
-            overflow-x: hidden;
+            width: 100%;
+            overflow-x: hidden; /* Trava o scroll horizontal no celular */
+        }
+
+        img, svg {
+            max-width: 100%;
+            height: auto;
         }
 
         .container {
@@ -48,8 +55,9 @@
             border-bottom: 1px solid var(--borda);
             position: sticky;
             top: 0;
-            background-color: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 100;
         }
 
@@ -64,12 +72,11 @@
             background-color: var(--verde-gptech);
             color: #ffffff;
             padding: 10px 20px;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
             display: inline-flex;
@@ -80,7 +87,7 @@
         .btn-contato:hover {
             background-color: var(--verde-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
         }
 
         /* HERO SECTION */
@@ -152,44 +159,42 @@
         .fixed-image-card {
             background-color: var(--bg-principal);
             border: 1px solid var(--borda);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
             box-shadow: var(--sombra-suave);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
         }
 
         .fixed-image-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--verde-gptech);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
+            transform: translateY(-6px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.12);
         }
 
         .image-container {
             width: 100%;
-            height: 300px; /* Altura aumentada para mostrar melhor a imagem */
+            height: 280px;
             overflow: hidden;
             background-color: var(--cinza-claro);
             position: relative;
         }
 
-        /* Agora a imagem vai cobrir todo o espaço, ficando perfeitamente preenchida */
         .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover; 
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Oculta o ícone quebrado caso a imagem não exista na pasta ainda */
         .image-container img:not([src]), .image-container img[src=""] {
             opacity: 0;
         }
 
         .fixed-image-card:hover .image-container img {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .image-card-content {
@@ -202,34 +207,49 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
         .image-card-content p {
             font-size: 14px;
             color: var(--txt-secundario);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        /* SEÇÃO PERSONALIZAR CONVITE */
+        /* =========================================
+           SEÇÃO PERSONALIZAR CONVITE (DESIGN LUXO)
+           ========================================= */
         .convite-section {
-            padding: 80px 0;
+            padding: 100px 0;
             background-color: var(--bg-principal);
+            background-image: radial-gradient(circle at top right, rgba(16,185,129,0.03) 0%, transparent 40%);
         }
 
-        .form-card {
-            background-color: #ffffff;
-            border: 1px solid var(--borda);
-            border-radius: 16px;
-            padding: 48px;
-            box-shadow: var(--sombra-suave);
+        .lux-form-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 56px;
+            box-shadow: var(--sombra-luxo);
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            border: 1px solid rgba(229, 231, 235, 0.6);
+        }
+
+        .lux-form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #10b981, #34d399);
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 32px 24px;
         }
 
         .form-group {
@@ -241,51 +261,98 @@
             grid-column: span 2;
         }
 
-        .form-group label {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--txt-principal);
+        .lux-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--txt-secundario);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .form-control {
-            padding: 14px 16px;
-            border: 1px solid var(--borda);
-            border-radius: 8px;
+        .lux-label span {
+            font-size: 16px; /* Aumenta o emoji levemente para dar elegância */
+        }
+
+        .lux-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
             font-size: 15px;
             color: var(--txt-principal);
-            background-color: var(--cinza-claro);
+            background-color: #fafafa;
             transition: all 0.3s ease;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        .form-control:focus {
+        .lux-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .lux-input:focus {
             outline: none;
             border-color: var(--verde-gptech);
             background-color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
         }
 
-        textarea.form-control {
+        textarea.lux-input {
             resize: vertical;
             min-height: 120px;
         }
 
-        input[type="color"].form-control {
-            padding: 4px;
-            height: 50px;
+        /* Estilização Premium para Inputs de Cor e Arquivo */
+        input[type="color"].lux-input {
+            padding: 8px;
+            height: 56px;
             cursor: pointer;
         }
 
-        input[type="file"].form-control {
-            padding: 10px 16px;
+        input[type="file"].lux-input {
+            padding: 14px 20px;
             background-color: #ffffff;
+            border: 2px dashed #d1d5db;
+            cursor: pointer;
+            color: var(--txt-secundario);
+        }
+        
+        input[type="file"].lux-input:hover {
+            border-color: var(--verde-gptech);
+            background-color: rgba(16, 185, 129, 0.02);
+        }
+
+        /* Botão Premium */
+        .btn-premium {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+            width: 100%;
+            max-width: 320px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
         }
 
         .form-submit-wrapper {
-            margin-top: 32px;
+            margin-top: 24px;
             text-align: right;
             grid-column: span 2;
+            display: flex;
+            justify-content: flex-end;
         }
 
         /* FOOTER */
@@ -396,29 +463,45 @@
             animation: drawOutline 2.5s ease-in-out 0.5s forwards, fillDigital 1s ease-in-out 2s forwards;
         }
 
-        @keyframes drawOutline {
-            0% { stroke-dashoffset: 600; }
-            100% { stroke-dashoffset: 0; }
-        }
-        @keyframes fillGP {
-            100% { fill: var(--txt-principal); stroke: transparent; }
-        }
-        @keyframes fillDigital {
-            100% { fill: var(--verde-gptech); stroke: transparent; }
-        }
-
+        /* =========================================
+           RESPONSIVIDADE - AJUSTES PARA MOBILE
+           ========================================= */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 36px; }
+            .container {
+                padding: 0 16px;
+                overflow: hidden; /* Evita quebra de margens */
+            }
+            .hero { padding: 60px 0; }
+            .hero h1 { 
+                font-size: 32px; 
+                line-height: 1.2;
+                letter-spacing: -1px;
+            }
             .hero p { font-size: 16px; }
-            .form-grid { grid-template-columns: 1fr; }
+            
+            /* Ajustes do Formulário no Mobile */
+            .form-grid { grid-template-columns: 1fr; gap: 20px; }
             .form-group.full-width { grid-column: 1; }
-            .form-submit-wrapper { grid-column: 1; text-align: center; }
-            .form-card { padding: 24px; }
+            .form-submit-wrapper { 
+                grid-column: 1; 
+                justify-content: center; 
+            }
+            .lux-form-card { 
+                padding: 32px 20px; 
+                border-radius: 16px;
+            }
+            .btn-premium { max-width: 100%; padding: 16px; }
+            
             .delay-1, .delay-2, .delay-3, .delay-4 { transition-delay: 0s; }
-            .brand-text-svg { font-size: 28px; }
-            .animated-brand-wrapper { height: 40px; margin-top: 40px; }
-            .header-logo-wrapper { width: 170px; }
+            
+            /* Ajustes das Logos SVG no Mobile para não quebrar a tela */
+            .animated-brand-wrapper { height: 40px; margin-top: 40px; width: 100%; }
+            .brand-text-svg { font-size: 26px; }
+            .header-logo-wrapper { width: 150px; }
             .header-text-svg { font-size: 20px; }
+            
+            /* Força Inputs a ficarem dentro da tela */
+            .lux-input { width: 100%; max-width: 100%; box-sizing: border-box; }
         }
     </style>
 </head>
@@ -440,9 +523,9 @@
     </header>
 
     <section class="container hero">
-        <span class="hero-tag reveal-blur">Plataforma de Criação</span>
-        <h1 class="reveal-blur delay-1">Crie experiências visuais e convites inesquecíveis.</h1>
-        <p class="reveal-blur delay-2">Plataforma rápida, moderna e intuitiva para gerenciar seus projetos e criar páginas personalizadas.</p>
+        <span class="hero-tag reveal-blur">Soluções Premium</span>
+        <h1 class="reveal-blur delay-1">Crie experiências visuais inesquecíveis.</h1>
+        <p class="reveal-blur delay-2">Uma plataforma moderna, rápida e intuitiva. Gerencie seus projetos, portfólios e crie convites de alto padrão perfeitamente adaptados para qualquer dispositivo.</p>
     </section>
 
     <!-- SEÇÃO: 6 IMAGENS FIXAS NOS CARDS (COM ARQUIVOS LOCAIS) -->
@@ -450,74 +533,68 @@
         <div class="container">
             <div class="section-header reveal-blur">
                 <h2>Galeria de Projetos</h2>
-                <p>Nossos projetos e portfólio.</p>
+                <p>Nossos principais trabalhos e estruturas digitais.</p>
             </div>
 
             <div class="grid-projetos">
                 
-                <!-- Card 1 -->
                 <div class="fixed-image-card reveal-blur delay-1">
                     <div class="image-container">
                         <img src="projeto-1.jpeg" alt="Projeto 1">
                     </div>
                     <div class="image-card-content">
-                        <h3>Sistema Web 01</h3>
-                        <p>Plataforma corporativa e painel de controle administrativo em tempo real.</p>
+                        <h3>Sistema Web Corporativo</h3>
+                        <p>Painel de controle administrativo em tempo real focado em alta conversão e estabilidade.</p>
                     </div>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="fixed-image-card reveal-blur delay-2">
                     <div class="image-container">
                         <img src="projeto-2.jpeg" alt="Projeto 2">
                     </div>
                     <div class="image-card-content">
                         <h3>Dashboard Analítico</h3>
-                        <p>Gráficos dinâmicos para acompanhamento de métricas e desempenho.</p>
+                        <p>Gráficos dinâmicos para acompanhamento de métricas, lucros e desempenho corporativo.</p>
                     </div>
                 </div>
 
-                <!-- Card 3 -->
                 <div class="fixed-image-card reveal-blur delay-3">
                     <div class="image-container">
                         <img src="projeto-3.jpeg" alt="Projeto 3">
                     </div>
                     <div class="image-card-content">
                         <h3>Equipe & Processos</h3>
-                        <p>Ferramentas integradas para auditoria, checklist e relatórios operacionais.</p>
+                        <p>Ferramentas integradas para auditoria, checklists padronizados e relatórios de campo.</p>
                     </div>
                 </div>
 
-                <!-- Card 4 -->
                 <div class="fixed-image-card reveal-blur delay-4">
                     <div class="image-container">
                         <img src="projeto-4.jpeg" alt="Projeto 4">
                     </div>
                     <div class="image-card-content">
                         <h3>Automação de Estoque</h3>
-                        <p>Controle completo de entradas, saídas e movimentações de insumos.</p>
+                        <p>Controle financeiro completo de entradas, saídas e movimentações inteligentes de insumos.</p>
                     </div>
                 </div>
 
-                <!-- Card 5 -->
                 <div class="fixed-image-card reveal-blur delay-1">
                     <div class="image-container">
                         <img src="projeto-5.jpeg" alt="Projeto 5">
                     </div>
                     <div class="image-card-content">
-                        <h3>App Mobile & QR Code</h3>
-                        <p>Soluções ágeis para captação de feedback e interação com clientes.</p>
+                        <h3>Soluções Mobile</h3>
+                        <p>Aplicativos ágeis para captação de feedback via QR Code e interação inteligente com clientes.</p>
                     </div>
                 </div>
 
-                <!-- Card 6 -->
                 <div class="fixed-image-card reveal-blur delay-2">
                     <div class="image-container">
                         <img src="projeto-6.jpeg" alt="Projeto 6">
                     </div>
                     <div class="image-card-content">
-                        <h3>Marketing & Motion</h3>
-                        <p>Produção de materiais visuais modernos para alta retenção digital.</p>
+                        <h3>Motion & Design</h3>
+                        <p>Produção de materiais visuais modernos e vídeos projetados para altíssima retenção digital.</p>
                     </div>
                 </div>
 
@@ -525,76 +602,76 @@
         </div>
     </section>
 
-    <!-- SEÇÃO: PERSONALIZAR CONVITE -->
+    <!-- SEÇÃO: PERSONALIZAR CONVITE (DESIGN LUXURY) -->
     <section class="convite-section" id="convites">
         <div class="container">
             <div class="section-header reveal-blur">
-                <h2>Personalize seu Convite</h2>
-                <p>Preencha as informações abaixo para estruturar o seu convite digital exclusivo, com todas as opções completas.</p>
+                <h2>Crie o Convite Perfeito</h2>
+                <p>Personalize cada detalhe. Nossa estrutura luxuosa transformará as suas informações em uma página exclusiva para o seu evento.</p>
             </div>
 
-            <div class="form-card reveal-blur delay-1">
+            <div class="lux-form-card reveal-blur delay-1">
                 <form action="#" method="POST" enctype="multipart/form-data">
                     <div class="form-grid">
                         
                         <!-- Nome do Evento -->
                         <div class="form-group full-width">
-                            <label for="nomeEvento">🎊 Nome do Evento</label>
-                            <input type="text" id="nomeEvento" class="form-control" placeholder="Ex: Casamento da Ana e Rafael, Aniversário de 15 Anos..." required>
+                            <label for="nomeEvento" class="lux-label"><span>✨</span> Nome do Evento</label>
+                            <input type="text" id="nomeEvento" class="lux-input" placeholder="Ex: Casamento de Ana e Rafael..." required>
                         </div>
 
                         <!-- Data -->
                         <div class="form-group">
-                            <label for="dataEvento">📅 Data</label>
-                            <input type="date" id="dataEvento" class="form-control" required>
+                            <label for="dataEvento" class="lux-label"><span>📅</span> Data da Celebração</label>
+                            <input type="date" id="dataEvento" class="lux-input" required>
                         </div>
 
                         <!-- Horário -->
                         <div class="form-group">
-                            <label for="horaEvento">⏰ Horário</label>
-                            <input type="time" id="horaEvento" class="form-control" required>
+                            <label for="horaEvento" class="lux-label"><span>⏰</span> Horário</label>
+                            <input type="time" id="horaEvento" class="lux-input" required>
                         </div>
 
                         <!-- Localização -->
                         <div class="form-group">
-                            <label for="localEvento">📍 Localização (Endereço ou Link Maps)</label>
-                            <input type="text" id="localEvento" class="form-control" placeholder="Rua das Flores, 123 - Espaço Vida" required>
+                            <label for="localEvento" class="lux-label"><span>📍</span> Endereço ou Maps</label>
+                            <input type="text" id="localEvento" class="lux-input" placeholder="Rua das Flores, 123 - Espaço Vida" required>
                         </div>
 
                         <!-- Número de Telefone -->
                         <div class="form-group">
-                            <label for="telefone">📱 Número de Telefone (Confirmação)</label>
-                            <input type="tel" id="telefone" class="form-control" placeholder="(11) 99999-9999" required>
+                            <label for="telefone" class="lux-label"><span>📱</span> Contato RSVP</label>
+                            <input type="tel" id="telefone" class="lux-input" placeholder="(11) 99999-9999" required>
                         </div>
 
                         <!-- Cor do Tema -->
                         <div class="form-group">
-                            <label for="corTema">🎨 Cor Principal do Tema</label>
-                            <input type="color" id="corTema" class="form-control" value="#10b981" title="Escolha a cor do seu convite">
+                            <label for="corTema" class="lux-label"><span>🎨</span> Cor do Tema (Paleta)</label>
+                            <input type="color" id="corTema" class="lux-input" value="#10b981">
                         </div>
 
                         <!-- Música de Fundo -->
                         <div class="form-group">
-                            <label for="musica">🎵 Música de Fundo (MP3)</label>
-                            <input type="file" id="musica" class="form-control" accept="audio/*">
+                            <label for="musica" class="lux-label"><span>🎵</span> Trilha Sonora (MP3)</label>
+                            <input type="file" id="musica" class="lux-input" accept="audio/*">
                         </div>
 
-                        <!-- Imagens Extras para o Convite -->
+                        <!-- Imagens Extras -->
                         <div class="form-group full-width">
-                            <label for="imagemConvite">🖼️ Imagens do Convite</label>
-                            <input type="file" id="imagemConvite" class="form-control" accept="image/*" multiple>
+                            <label for="imagemConvite" class="lux-label"><span>📸</span> Álbum de Fotos do Evento</label>
+                            <input type="file" id="imagemConvite" class="lux-input" accept="image/*" multiple>
                         </div>
 
                         <!-- Informações Adicionais -->
                         <div class="form-group full-width">
-                            <label for="infoAdicional">📝 Informações Adicionais</label>
-                            <textarea id="infoAdicional" class="form-control" placeholder="Ex: Traje esporte fino, lista de presentes em anexo, estacionamento gratuito no local..."></textarea>
+                            <label for="infoAdicional" class="lux-label"><span>📝</span> Detalhes Essenciais</label>
+                            <textarea id="infoAdicional" class="lux-input" placeholder="Ex: Traje esporte fino, lista de presentes, manobrista no local..."></textarea>
                         </div>
 
                         <!-- Botão Submit -->
                         <div class="form-submit-wrapper">
-                            <button type="submit" class="btn-contato" style="padding: 16px 32px; font-size: 16px; width: 100%; max-width: 300px;">
-                                Gerar Meu Convite 🚀
+                            <button type="submit" class="btn-premium">
+                                Gerar Convite Exclusivo 🥂
                             </button>
                         </div>
 
@@ -606,12 +683,12 @@
 
     <footer class="reveal-blur">
         <div class="container">
-            <h3>Ficou com alguma dúvida?</h3>
-            <p>Entre em contato conosco pelo WhatsApp para desenharmos a arquitetura ideal do seu evento.</p>
-            <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato" style="padding: 14px 28px; display: inline-block;">Fale Conosco no WhatsApp</a>
+            <h3>Preparado para o próximo nível?</h3>
+            <p>Converse conosco no WhatsApp e vamos estruturar a solução tecnológica ideal para o seu projeto.</p>
+            <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato" style="padding: 16px 32px; font-size: 15px; display: inline-block; border-radius: 8px;">Fale com um Especialista</a>
             
             <div class="animated-brand-wrapper" id="brandFormation">
-                <svg width="100%" height="100%" viewBox="0 0 350 50">
+                <svg width="100%" height="100%" viewBox="0 0 350 50" preserveAspectRatio="xMidYMid meet">
                     <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" class="brand-text-svg">
                         <tspan class="svg-gp">GP Tech</tspan>
                         <tspan class="svg-digital" dx="8">Digital</tspan>
@@ -653,7 +730,7 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { rootMargin: '0px 0px -20px 0px', threshold: 0.5 }); 
+            }, { rootMargin: '0px 0px -20px 0px', threshold: 0.3 }); 
 
             const brandWrapper = document.getElementById('brandFormation');
             if(brandWrapper) observerSVG.observe(brandWrapper);
