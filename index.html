@@ -170,13 +170,22 @@
             height: 220px;
             overflow: hidden;
             background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* Corrigido para carregar perfeitamente suas imagens locais */
         .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+        }
+
+        /* Texto que aparece caso a imagem ainda não esteja na pasta */
+        .image-container img:not([src]), .image-container img[src=""] {
+            opacity: 0;
         }
 
         .fixed-image-card:hover .image-container img {
@@ -433,12 +442,12 @@
         <p class="reveal-blur delay-2">Plataforma rápida, moderna e intuitiva para gerenciar seus projetos e criar páginas personalizadas.</p>
     </section>
 
-    <!-- SEÇÃO: 6 IMAGENS FIXAS NOS CARDS -->
+    <!-- SEÇÃO: 6 IMAGENS FIXAS NOS CARDS (COM ARQUIVOS LOCAIS) -->
     <section class="projetos-section" id="imagens">
         <div class="container">
             <div class="section-header reveal-blur">
-                <h2>Galeria de Projetos Fixos</h2>
-                <p>Estes cards exibem arquivos de imagem salvos permanentemente na estrutura do seu site. (Basta substituir os nomes dos arquivos nos atributos src abaixo).</p>
+                <h2>Galeria de Projetos</h2>
+                <p>Nossos projetos e portfólio.</p>
             </div>
 
             <div class="grid-projetos">
@@ -446,8 +455,7 @@
                 <!-- Card 1 -->
                 <div class="fixed-image-card reveal-blur delay-1">
                     <div class="image-container">
-                        <!-- Altere "img/foto1.jpg" para o caminho da sua imagem real no servidor -->
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Projeto 1">
+                        <img src="projeto-1.png" alt="Projeto 1">
                     </div>
                     <div class="image-card-content">
                         <h3>Sistema Web 01</h3>
@@ -458,7 +466,7 @@
                 <!-- Card 2 -->
                 <div class="fixed-image-card reveal-blur delay-2">
                     <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Projeto 2">
+                        <img src="projeto-2.png" alt="Projeto 2">
                     </div>
                     <div class="image-card-content">
                         <h3>Dashboard Analítico</h3>
@@ -469,7 +477,7 @@
                 <!-- Card 3 -->
                 <div class="fixed-image-card reveal-blur delay-3">
                     <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Projeto 3">
+                        <img src="projeto-3.png" alt="Projeto 3">
                     </div>
                     <div class="image-card-content">
                         <h3>Equipe & Processos</h3>
@@ -480,7 +488,7 @@
                 <!-- Card 4 -->
                 <div class="fixed-image-card reveal-blur delay-4">
                     <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Projeto 4">
+                        <img src="projeto-4.png" alt="Projeto 4">
                     </div>
                     <div class="image-card-content">
                         <h3>Automação de Estoque</h3>
@@ -491,7 +499,7 @@
                 <!-- Card 5 -->
                 <div class="fixed-image-card reveal-blur delay-1">
                     <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Projeto 5">
+                        <img src="projeto-5.png" alt="Projeto 5">
                     </div>
                     <div class="image-card-content">
                         <h3>App Mobile & QR Code</h3>
@@ -502,7 +510,7 @@
                 <!-- Card 6 -->
                 <div class="fixed-image-card reveal-blur delay-2">
                     <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80" alt="Projeto 6">
+                        <img src="projeto-6.png" alt="Projeto 6">
                     </div>
                     <div class="image-card-content">
                         <h3>Marketing & Motion</h3>
