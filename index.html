@@ -169,21 +169,20 @@
             width: 100%;
             height: 220px;
             overflow: hidden;
-            background-color: #e2e8f0;
+            background-color: var(--bg-principal); /* Alterado para branco para harmonizar com contain */
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 10px; /* Adicionado um respiro leve ao redor da imagem */
         }
 
-        /* Corrigido para carregar perfeitamente suas imagens locais */
         .image-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Alterado de cover para contain: impede cortes */
             transition: transform 0.5s ease;
         }
 
-        /* Texto que aparece caso a imagem ainda não esteja na pasta */
         .image-container img:not([src]), .image-container img[src=""] {
             opacity: 0;
         }
@@ -194,6 +193,7 @@
 
         .image-card-content {
             padding: 20px;
+            border-top: 1px solid var(--borda); /* Divisória suave entre imagem e texto */
         }
 
         .image-card-content h3 {
