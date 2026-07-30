@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                              `Olá! Gostaria de um orçamento e prosseguir com a criação deste convite.`;
 
             // Codificação da mensagem para a URL
-            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+            const urlWhatsApp = `https://wa.me/${5519993405480}?text=${encodeURIComponent(mensagem)}`;
 
             // Redirecionamento para o WhatsApp em uma nova aba
             window.open(urlWhatsApp, '_blank');
