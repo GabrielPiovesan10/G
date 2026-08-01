@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GP Tech Digital - Convites Digitais</title>
-    <meta name="description" content="Convites digitais personalizados para festas, casamentos e eventos. Adicione música, cores e muito mais com a GP Tech Digital.">
+    <meta name="description" content="Convites digitais personalizados para festas, casamentos e eventos. Escolha o valor que deseja pagar e personalize com a GP Tech Digital.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,6 @@
             </div>
             <nav>
                 <a href="#inicio">Início</a>
-                <a href="#portfolio">Portfólio</a>
                 <a href="#pedido" class="btn-primary">Fazer Pedido</a>
             </nav>
         </div>
@@ -37,8 +36,11 @@
     <section id="inicio" class="hero">
         <div class="hero-content">
             <h2 class="lux-title">Convites Digitais <em>Exclusivos</em></h2>
-            <p>Celebre seus melhores momentos com convites modernos, práticos e 100% personalizados. Surpreenda seus convidados antes mesmo da festa começar.</p>
-            <a href="#pedido" class="btn-primary pulse"><i class="fab fa-whatsapp"></i> Solicite seu Convite</a>
+            <h3 style="font-size: 1.5rem; font-weight: 600; margin: 20px 0; color: #fff;">
+                Escolha o valor que você deseja pagar no convite digital personalizado!
+            </h3>
+            <p>Celebre seus melhores momentos com convites modernos e práticos. Um design premium pelo preço que cabe no seu orçamento.</p>
+            <a href="#pedido" class="btn-primary pulse"><i class="fas fa-magic"></i> Quero Personalizar Meu Convite</a>
         </div>
         <div class="hero-glow"></div>
     </section>
@@ -64,52 +66,28 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2>Nosso Portfólio</h2>
-                <p>Soluções digitais que impulsionam seu evento e negócio.</p>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="assets/img/portfolio1.jpeg" alt="Convites Digitais Personalizados" onerror="this.src='https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80'">
-                    <div class="portfolio-overlay">
-                        <h3>Site de Avaliação</h3>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="assets/img/portfolio2.jpeg" alt="Álbum Coletivo para Festas" onerror="this.src='https://images.unsplash.com/photo-1549451371-64aa98a6f660?auto=format&fit=crop&w=800&q=80'">
-                    <div class="portfolio-overlay">
-                        <h3>Sistemas GP Tech Digital</h3>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="assets/img/portfolio3.jpeg" alt="Sistemas de Gestão" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80'">
-                    <div class="portfolio-overlay">
-                        <h3>Convites Casamento & Aniversário</h3>
-                    </div>
-                </div>
-            </div>
-            <p class="portfolio-note"><i class="fas fa-info-circle"></i> Estes são alguns dos serviços realizados pela GP Tech Digital.</p>
-        </div>
-    </section>
-
     <!-- Order Section (Customization Form) -->
     <section id="pedido" class="order-section">
         <div class="container">
             <div class="order-container">
                 <div class="order-info">
-                    <h2>Personalize Seu Convite</h2>
-                    <p>Preencha os detalhes abaixo e seja direcionado ao nosso WhatsApp para finalizar o pedido.</p>
+                    <h2>Crie Seu Convite</h2>
+                    <p>Preencha os detalhes abaixo para personalizar seu convite digital. Ao finalizar, você será direcionado ao nosso WhatsApp.</p>
                     <ul class="order-benefits">
-                        <li><i class="fas fa-check-circle"></i> Orçamento rápido</li>
+                        <li><i class="fas fa-check-circle"></i> Você define o valor</li>
                         <li><i class="fas fa-check-circle"></i> Design premium</li>
                         <li><i class="fas fa-check-circle"></i> Atendimento exclusivo</li>
                     </ul>
                 </div>
                 
                 <form id="inviteForm" class="order-form">
+                    
+                    <!-- NOVO CAMPO: Valor Desejado -->
+                    <div class="form-group" style="background: rgba(29, 185, 84, 0.1); padding: 15px; border-radius: 8px; border: 1px solid #1DB954;">
+                        <label for="valorPagamento" style="color: #1DB954; font-weight: 600;">Qual valor você deseja pagar pelo convite?</label>
+                        <input type="text" id="valorPagamento" placeholder="Ex: R$ 50,00" required style="border-color: #1DB954;">
+                    </div>
+
                     <div class="form-group">
                         <label for="tipoEvento">Tipo de Evento</label>
                         <select id="tipoEvento" required>
