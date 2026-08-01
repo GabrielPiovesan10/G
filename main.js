@@ -1,57 +1,95 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const inviteForm = document.getElementById('inviteForm');
+document.addEventListener("DOMContentLoaded", () => {
     
-    // Smooth scroll para links internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
+    const form = document.getElementById("inviteForm");
+    const valorInput = document.getElementById("valorPagamento");
+    const modal = document.getElementById("customModal");
+    const closeModalBtn = document.getElementById("closeModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMessage = document.getElementById("modalMessage");
+    const modalIcon = document.querySelector(".modal-icon i");
+
+    // Formatação automática do campo de valor para Moeda (R$)
+    valorInput.addEventListener("input", function(e) {
+        let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+        if (value === "") {
+            e.target.value = "";
+            return;
+        }
+        
+        value = (parseInt(value) / 100).toFixed(2) + ""; // Divide por 100 e fixa 2 casas
+        value = value.replace(".", ",");
+        value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); // Coloca pontos nos milhares
+        
+        e.target.value = "R$ " + value;
     });
 
-    if (inviteForm) {
-        inviteForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Impede o recarregamento da página
+    // Função para abrir o modal de aviso
+    function showModal(title, message, isError = true) {
+        modalTitle.textContent = title;
+        modalMessage.textContent = message;
+        
+        if(isError) {
+            modalIcon.className = "fas fa-exclamation-circle";
+            modalIcon.style.color = "#e74c3c"; // Vermelho
+        } else {
+            modalIcon.className = "fas fa-check-circle";
+            modalIcon.style.color = "#1DB954"; // Verde
+        }
 
-            // Captura dos dados do formulário
-            const tipoEvento = document.getElementById('tipoEvento').value;
-            const nome = document.getElementById('nome').value;
-            const data = document.getElementById('data').value;
-            const horario = document.getElementById('horario').value;
-            const localizacao = document.getElementById('localizacao').value;
-            const corPrimaria = document.getElementById('corPrimaria').value;
-            const musica = document.getElementById('musica').value || 'Não informada';
-            const detalhes = document.getElementById('detalhes').value || 'Sem detalhes adicionais';
-
-            // Formatação da data (de YYYY-MM-DD para DD/MM/YYYY)
-            let dataFormatada = 'Não informada';
-            if (data) {
-                const [ano, mes, dia] = data.split('-');
-                dataFormatada = `${dia}/${mes}/${ano}`;
-            }
-
-            // Número do WhatsApp da GP Tech Digital (DDI + DDD + Número)
-            const numeroWhatsApp = '5519993405480';
-
-            // Montagem da mensagem formatada
-            const mensagem = `*Novo Pedido de Convite Digital - GP Tech Digital* 🚀\n\n` +
-                             `*Tipo de Evento:* ${tipoEvento}\n` +
-                             `*Nome(s):* ${nome}\n` +
-                             `*Data:* ${dataFormatada}\n` +
-                             `*Horário:* ${horario}\n` +
-                             `*Localização:* ${localizacao}\n` +
-                             `*Cor Principal:* ${corPrimaria}\n` +
-                             `*Música:* ${musica}\n\n` +
-                             `*Detalhes Adicionais:*\n${detalhes}\n\n` +
-                             `Olá! Gostaria de um orçamento e prosseguir com a criação deste convite.`;
-
-            // Codificação da mensagem para a URL usando a API oficial de envio
-            const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}`;
-
-            // Redirecionamento para o WhatsApp em uma nova aba
-            window.open(urlWhatsApp, '_blank');
-        });
+        modal.classList.remove("hidden");
     }
+
+    // Fechar Modal
+    closeModalBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+    });
+
+    // Fechar clicando fora da caixa
+    modal.addEventListener("click", (e) => {
+        if(e.target === modal) modal.classList.add("hidden");
+    });
+
+    // Envio do Formulário
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        // Extrai apenas os números do valor preenchido
+        const valorDigitado = valorInput.value;
+        const valorNumerico = parseFloat(valorDigitado.replace(/\D/g, "")) / 100;
+
+        // Validação Mínima de 40 reais
+        if (isNaN(valorNumerico) || valorNumerico < 40) {
+            showModal(
+                "Valor Abaixo do Mínimo", 
+                "O valor mínimo para personalização exclusiva do convite digital é de R$ 40,00. Por favor, ajuste o valor para continuarmos.",
+                true
+            );
+            return; // Interrompe o envio
+        }
+
+        // Se passar da validação, captura os dados
+        const tipoEvento = document.getElementById("tipoEvento").value;
+        const nome = document.getElementById("nome").value;
+        const data = document.getElementById("data").value;
+        const horario = document.getElementById("horario").value;
+        const localizacao = document.getElementById("localizacao").value;
+        const detalhes = document.getElementById("detalhes").value;
+
+        // Monta a mensagem profissional para o WhatsApp
+        const telefone = "5519993405480"; // O número que estava no seu rodapé
+        const mensagem = `Olá, GP Tech Digital! Gostaria de fazer o pedido de um convite digital personalizado.%0A%0A` +
+            `*Valor da Oferta:* ${valorDigitado}%0A` +
+            `*Evento:* ${tipoEvento}%0A` +
+            `*Anfitriões:* ${nome}%0A` +
+            `*Data/Hora:* ${data.split('-').reverse().join('/')} às ${horario}%0A` +
+            `*Local:* ${localizacao}%0A` +
+            `*Detalhes:* ${detalhes}%0A%0A` +
+            `Aguardo o link para pagamento via InfinitePay ou Pix e os próximos passos. Obrigado!`;
+
+        const url = `https://wa.me/${telefone}?text=${mensagem}`;
+        
+        // Redireciona
+        window.open(url, "_blank");
+    });
+
 });
