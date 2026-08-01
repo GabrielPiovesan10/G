@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalIcon = document.querySelector(".modal-icon i");
     const modalBox = document.querySelector(".modal-box");
 
-    // Formatação automática do campo de valor para Moeda (R$) enquanto o cliente digita
+    // Formatação automática do campo de valor para Moeda (R$)
     valorInput.addEventListener("input", function(e) {
         let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
         if (value === "") {
@@ -42,35 +42,33 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.classList.remove("hidden");
     }
 
-    // Fechar Modal pelo botão
+    // Fechar Modal
     closeModalBtn.addEventListener("click", () => {
         modal.classList.add("hidden");
     });
 
-    // Fechar clicando na área escura fora da caixa
+    // Fechar clicando fora da caixa
     modal.addEventListener("click", (e) => {
         if(e.target === modal) modal.classList.add("hidden");
     });
 
-    // Submissão do Formulário
+    // Envio do Formulário
     form.addEventListener("submit", function(e) {
         e.preventDefault();
 
-        // Limpa o valor para pegar apenas os números e checar se é menor que 40
         const valorDigitado = valorInput.value;
         const valorNumerico = parseFloat(valorDigitado.replace(/\D/g, "")) / 100;
 
-        // VALIDAÇÃO: Bloqueia valores abaixo de R$ 40,00
+        // Validação Mínima de 40 reais
         if (isNaN(valorNumerico) || valorNumerico < 40) {
             showModal(
                 "Valor Abaixo do Mínimo", 
                 "O valor mínimo para garantirmos a personalização exclusiva e a qualidade do convite digital é de R$ 40,00. Por favor, ajuste o valor para continuarmos.",
                 true
             );
-            return; // Para a execução aqui e não envia para o WhatsApp
+            return; // Interrompe o envio
         }
 
-        // Se o valor estiver correto, captura os dados do cliente
         const tipoEvento = document.getElementById("tipoEvento").value;
         const nome = document.getElementById("nome").value;
         const data = document.getElementById("data").value;
@@ -78,8 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const localizacao = document.getElementById("localizacao").value;
         const detalhes = document.getElementById("detalhes").value;
 
-        // Monta a mensagem pronta para enviar no WhatsApp da GP Tech Digital
-        const telefone = "5519993405480";
+        // Monta a mensagem para o WhatsApp
+        const telefone = "5519993405480"; // O número que estava no seu rodapé
         const mensagem = `Olá, GP Tech Digital! Gostaria de fazer o pedido de um convite digital personalizado.%0A%0A` +
             `*Valor da Oferta:* ${valorDigitado}%0A` +
             `*Evento:* ${tipoEvento}%0A` +
@@ -91,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const url = `https://wa.me/${telefone}?text=${mensagem}`;
         
-        // Abre o WhatsApp em uma nova aba
         window.open(url, "_blank");
     });
 
