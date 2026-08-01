@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GP Tech Digital - Convites Digitais</title>
-    <meta name="description" content="Convites digitais personalizados para festas, casamentos e eventos. Escolha o valor que deseja pagar e personalize com a GP Tech Digital.">
+    <meta name="description" content="Convites digitais personalizados para festas, casamentos e eventos. Escolha o valor que deseja pagar e personalize.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,6 +19,18 @@
 </head>
 <body>
 
+    <!-- Modal Customizado (Avisos Profissionais) -->
+    <div id="customModal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h3 id="modalTitle">Aviso</h3>
+            <p id="modalMessage">Mensagem de erro aqui.</p>
+            <button id="closeModal" class="btn-primary">Entendi</button>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <header class="navbar">
         <div class="container">
@@ -27,6 +39,8 @@
             </div>
             <nav>
                 <a href="#inicio">Início</a>
+                <a href="#depoimentos">Avaliações</a>
+                <a href="#faq">Dúvidas</a>
                 <a href="#pedido" class="btn-primary">Fazer Pedido</a>
             </nav>
         </div>
@@ -34,34 +48,58 @@
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h2 class="lux-title">Convites Digitais <em>Exclusivos</em></h2>
-            <h3 style="font-size: 1.5rem; font-weight: 600; margin: 20px 0; color: #fff;">
-                Escolha o valor que você deseja pagar no convite digital personalizado!
-            </h3>
-            <p>Celebre seus melhores momentos com convites modernos e práticos. Um design premium pelo preço que cabe no seu orçamento.</p>
-            <a href="#pedido" class="btn-primary pulse"><i class="fas fa-magic"></i> Quero Personalizar Meu Convite</a>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h2 class="lux-title">Convites Digitais <em>Exclusivos</em></h2>
+                <h3 class="hero-subtitle">Escolha o valor que você deseja pagar no seu convite digital personalizado!</h3>
+                <p>Celebre seus melhores momentos com convites modernos e interativos. Um design premium pelo preço que cabe no seu orçamento.</p>
+                <div class="hero-badges">
+                    <span><i class="fas fa-star"></i> +500 Entregues</span>
+                    <span><i class="fas fa-bolt"></i> Rápido e Prático</span>
+                </div>
+                <a href="#pedido" class="btn-primary pulse"><i class="fas fa-magic"></i> Quero Personalizar Meu Convite</a>
+            </div>
+            
+            <!-- Mockup Celular -->
+            <div class="hero-visual">
+                <div class="smartphone-mockup">
+                    <div class="notch"></div>
+                    <div class="screen-content">
+                        <i class="fas fa-envelope-open-text invite-icon"></i>
+                        <h4>Ana & Carlos</h4>
+                        <p>Convite de Casamento</p>
+                        <div class="fake-btn">Confirmar Presença</div>
+                        <div class="fake-btn outline">Ver Localização</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="hero-glow"></div>
     </section>
 
-    <!-- Features -->
-    <section class="features">
-        <div class="container feature-grid">
-            <div class="feature-card">
-                <i class="fas fa-music"></i>
-                <h3>Sua Trilha Sonora</h3>
-                <p>Adicione a música favorita para tocar quando o convite for aberto.</p>
+    <!-- Social Proof (Depoimentos) -->
+    <section id="depoimentos" class="social-proof">
+        <div class="container">
+            <div class="section-header">
+                <h2>O que nossos clientes dizem</h2>
+                <p>A primeira impressão da sua festa começa aqui.</p>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-palette"></i>
-                <h3>Cores e Tema</h3>
-                <p>Personalização completa de cores, fontes e estilo do seu evento.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-map-marked-alt"></i>
-                <h3>Localização Precisa</h3>
-                <p>Botão integrado com GPS para guiar seus convidados até o local.</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Ficou perfeito! A música que escolhemos tocou direitinho e todos os convidados elogiaram a praticidade."</p>
+                    <strong>- Mariana Silva</strong>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Super recomendo a GP Tech. O mapa ajudou muito o pessoal a chegar na chácara sem se perder."</p>
+                    <strong>- Roberto Almeida</strong>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"O fato de eu poder definir o valor me ajudou muito no orçamento do aniversário. Atendimento nota 10!"</p>
+                    <strong>- Camila Souza</strong>
+                </div>
             </div>
         </div>
     </section>
@@ -72,20 +110,20 @@
             <div class="order-container">
                 <div class="order-info">
                     <h2>Crie Seu Convite</h2>
-                    <p>Preencha os detalhes abaixo para personalizar seu convite digital. Ao finalizar, você será direcionado ao nosso WhatsApp.</p>
+                    <p>Preencha os detalhes abaixo. Após o envio, finalizaremos o atendimento pelo WhatsApp e você receberá um link de pagamento seguro (InfinitePay ou Pix) para confirmar seu pedido.</p>
                     <ul class="order-benefits">
-                        <li><i class="fas fa-check-circle"></i> Você define o valor</li>
-                        <li><i class="fas fa-check-circle"></i> Design premium</li>
+                        <li><i class="fas fa-check-circle"></i> Você define o valor (Mínimo R$ 40,00)</li>
+                        <li><i class="fas fa-check-circle"></i> Design premium garantido</li>
                         <li><i class="fas fa-check-circle"></i> Atendimento exclusivo</li>
                     </ul>
                 </div>
                 
                 <form id="inviteForm" class="order-form">
                     
-                    <!-- NOVO CAMPO: Valor Desejado -->
-                    <div class="form-group" style="background: rgba(29, 185, 84, 0.1); padding: 15px; border-radius: 8px; border: 1px solid #1DB954;">
-                        <label for="valorPagamento" style="color: #1DB954; font-weight: 600;">Qual valor você deseja pagar pelo convite?</label>
-                        <input type="text" id="valorPagamento" placeholder="Ex: R$ 50,00" required style="border-color: #1DB954;">
+                    <!-- Campo de Valor com Destaque -->
+                    <div class="form-group highlight-box">
+                        <label for="valorPagamento">Qual valor você deseja pagar pelo convite? (Mínimo R$ 40,00)</label>
+                        <input type="text" id="valorPagamento" placeholder="R$ 0,00" required>
                     </div>
 
                     <div class="form-group">
@@ -121,26 +159,42 @@
                         <input type="text" id="localizacao" placeholder="Onde será a festa?" required>
                     </div>
 
-                    <div class="form-group-row">
-                        <div class="form-group half">
-                            <label for="corPrimaria">Cor Principal (Opcional)</label>
-                            <input type="color" id="corPrimaria" value="#1DB954">
-                        </div>
-                        <div class="form-group half">
-                            <label for="musica">Música de Fundo (Opcional)</label>
-                            <input type="text" id="musica" placeholder="Nome ou Link YouTube">
-                        </div>
-                    </div>
-
                     <div class="form-group">
-                        <label for="detalhes">Detalhes Adicionais</label>
-                        <textarea id="detalhes" rows="3" placeholder="Mensagem do convite, dress code, lista de presentes, etc."></textarea>
+                        <label for="detalhes">Detalhes Adicionais (Música, Cores, etc.)</label>
+                        <textarea id="detalhes" rows="3" placeholder="Qual será a cor principal? Vai ter música de fundo? Escreva aqui..."></textarea>
                     </div>
 
                     <button type="submit" class="btn-submit">
-                        <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
+                        <i class="fab fa-whatsapp"></i> Avançar para o WhatsApp
                     </button>
                 </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Dúvidas Frequentes</h2>
+            </div>
+            <div class="faq-grid">
+                <details class="faq-item">
+                    <summary>Em quanto tempo meu convite fica pronto?</summary>
+                    <p>O prazo padrão é de 24 a 48 horas após a confirmação do pagamento e envio de todas as informações corretas.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Posso colocar qualquer música no convite?</summary>
+                    <p>Sim! Basta nos enviar o nome da música ou o link do YouTube e nós adicionamos de fundo no seu convite digital.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Posso alterar os dados depois de pronto?</summary>
+                    <p>Você tem direito a até 2 alterações simples (como horário ou erro de digitação) gratuitamente antes da versão final ser entregue.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Como funciona o botão de localização?</summary>
+                    <p>Nós integramos o endereço que você fornecer direto com o Google Maps. Quando seu convidado clicar, o GPS dele já abre a rota para a festa.</p>
+                </details>
             </div>
         </div>
     </section>
@@ -150,7 +204,6 @@
         <div class="container footer-content">
             <div class="footer-logo">
                 <h2>GP Tech <span>Digital</span></h2>
-                <p>Soluções digitais que impulsionam o seu negócio.</p>
             </div>
             <div class="footer-contact">
                 <p><i class="fab fa-whatsapp"></i> (19) 99340-5480</p>
