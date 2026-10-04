@@ -1,1 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP Tech Digital | Desenvolvimento de Sites e Sistemas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* RESET E VARIÁVEIS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
 
+        :root {
+            --bg-principal: #ffffff;
+            --txt-principal: #111827;
+            --txt-secundario: #4b5563;
+            --verde-gptech: #10b981;
+            --verde-hover: #059669;
+            --cinza-claro: #f9fafb;
+            --borda: #e5e7eb;
+        }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--txt-principal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* HEADER / NAV */
+        header {
+            width: 100%;
+            border-bottom: 1px solid var(--borda);
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .btn-contato {
+            background-color: var(--verde-gptech);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-contato:hover {
+            background-color: var(--verde-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 100px 0 80px 0;
+            text-align: center;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background-color: var(--cinza-claro);
+            border: 1px solid var(--borda);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--verde-gptech);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            max-width: 800px;
+            margin: 0 auto 24px auto;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--txt-secundario);
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* SEÇÃO DE PROJETOS */
+        .projetos-section {
+            padding: 80px 0;
+            border-top: 1px solid var(--borda);
+        }
+
+        .section-header {
+            margin-bottom: 48px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--txt-secundario);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid-projetos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .card-projeto {
+            background-color: var(--bg-principal);
+            border: 1px solid var(--borda);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-projeto:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
+            border-color: var(--verde-gptech);
+        }
+
+        .card-projeto::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--verde-gptech);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card-projeto:hover::before {
+            transform: scaleX(1);
+        }
+
+        .icon-projeto {
+            width: 48px;
+            height: 48px;
+            background-color: var(--cinza-claro);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--borda);
+            transition: transform 0.3s ease;
+        }
+
+        .card-projeto:hover .icon-projeto {
+            transform: scale(1.1) rotate(5deg);
+            border-color: var(--verde-gptech);
+            color: var(--verde-gptech);
+        }
+
+        .card-projeto h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .card-projeto p {
+            color: var(--txt-secundario);
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .badge-tech {
+            display: inline-block;
+            background-color: var(--cinza-claro);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--txt-secundario);
+            border: 1px solid var(--borda);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--cinza-claro);
+            border-top: 1px solid var(--borda);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        footer h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        footer p {
+            color: var(--txt-secundario);
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        /* =========================================
+           ANIMAÇÕES DE ROLAGEM DOS CARDS (BLUR)
+           ========================================= */
+        .reveal-blur {
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(20px) scale(0.98); 
+            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal-blur.active {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0) scale(1);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        /* =========================================
+           EFEITOS DE LINHA ESCREVENDO O NOME (SVG)
+           ========================================= */
+        /* Configuração comum para os traços */
+        .svg-gp, .svg-digital {
+            fill: transparent;
+            stroke-dasharray: 600; 
+            stroke-dashoffset: 600;
+        }
+
+        .svg-gp { stroke: var(--txt-principal); }
+        .svg-digital { stroke: var(--verde-gptech); }
+
+        /* HEADER SVG LOGO */
+        .header-logo-wrapper {
+            width: 200px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-text-svg {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-text-svg .svg-gp { stroke-width: 1px; }
+        .header-text-svg .svg-digital { stroke-width: 1px; }
+
+        /* Animação Header: Mais rápida */
+        .header-logo-wrapper.active .svg-gp {
+            animation: drawOutline 1.5s ease-in-out forwards, fillGP 0.8s ease-in-out 1s forwards;
+        }
+        .header-logo-wrapper.active .svg-digital {
+            animation: drawOutline 1.5s ease-in-out 0.2s forwards, fillDigital 0.8s ease-in-out 1.2s forwards;
+        }
+
+        /* FOOTER SVG LOGO */
+        .animated-brand-wrapper {
+            margin-top: 50px;
+            width: 100%;
+            max-width: 400px;
+            height: 60px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand-text-svg {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 38px;
+            letter-spacing: -1.5px;
+        }
+
+        .brand-text-svg .svg-gp { stroke-width: 1.5px; }
+        .brand-text-svg .svg-digital { stroke-width: 1.5px; }
+
+        /* Animação Footer: Mais cadenciada e suave */
+        .animated-brand-wrapper.active .svg-gp {
+            animation: drawOutline 2.5s ease-in-out forwards, fillGP 1s ease-in-out 1.5s forwards;
+        }
+        .animated-brand-wrapper.active .svg-digital {
+            animation: drawOutline 2.5s ease-in-out 0.5s forwards, fillDigital 1s ease-in-out 2s forwards;
+        }
+
+        /* Keyframes das Animações SVG */
+        @keyframes drawOutline {
+            0% { stroke-dashoffset: 600; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        @keyframes fillGP {
+            100% { fill: var(--txt-principal); stroke: transparent; }
+        }
+
+        @keyframes fillDigital {
+            100% { fill: var(--verde-gptech); stroke: transparent; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 16px; }
+            .grid-projetos { grid-template-columns: 1fr; }
+            .delay-1, .delay-2, .delay-3, .delay-4 { transition-delay: 0s; }
+            .brand-text-svg { font-size: 28px; }
+            .animated-brand-wrapper { height: 40px; margin-top: 40px; }
+            .header-logo-wrapper { width: 170px; }
+            .header-text-svg { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="header-logo-wrapper" id="headerLogo">
+                <svg width="100%" height="100%" viewBox="0 0 200 40">
+                    <text x="0" y="55%" text-anchor="start" dominant-baseline="middle" class="header-text-svg">
+                        <tspan class="svg-gp">GP Tech</tspan>
+                        <tspan class="svg-digital" dx="5">Digital</tspan>
+                    </text>
+                </svg>
+            </div>
+            
+            <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato">Iniciar Projeto</a>
+        </div>
+    </header>
+
+    <section class="container hero">
+        <span class="hero-tag reveal-blur">Sistemas Digitais Sob Medida</span>
+        <h1 class="reveal-blur delay-1">Desenvolvimento de sites e sistemas digitais inteligentes.</h1>
+        <p class="reveal-blur delay-2">Transformamos ideias em plataformas de alto desempenho, focadas na automação de processos, experiência do usuário e resultados reais para o seu negócio.</p>
+        <div class="reveal-blur delay-3">
+            <a href="#projetos" class="btn-contato" style="padding: 14px 28px; font-size: 16px; display: inline-block;">Conhecer Soluções</a>
+        </div>
+    </section>
+
+    <section class="container projetos-section" id="projetos">
+        <div class="section-header reveal-blur">
+            <h2>Nossas Soluções</h2>
+            <p>Projetos e serviços criados para otimizar rotinas e engajar clientes.</p>
+        </div>
+
+        <div class="grid-projetos">
+            
+            <div class="card-projeto reveal-blur delay-1">
+                <div class="icon-projeto">⭐</div>
+                <h3>Sistema de Avaliação para Restaurantes</h3>
+                <p>Plataforma web ágil via QR Code que coleta feedbacks reais de clientes, gerando relatórios estratégicos de atendimento e infraestrutura.</p>
+                <span class="badge-tech">Web App / Real-time</span>
+            </div>
+
+            <div class="card-projeto reveal-blur delay-2">
+                <div class="icon-projeto">✓</div>
+                <h3>Checklists e Relatórios Operacionais</h3>
+                <p>Sistemas corporativos focados em auditoria e controle de rotinas, garantindo conformidade, segurança e redução de erros técnicos.</p>
+                <span class="badge-tech">Gestão / Processos</span>
+            </div>
+
+            <div class="card-projeto reveal-blur delay-3">
+                <div class="icon-projeto">📦</div>
+                <h3>Gestão de Estoque Inteligente</h3>
+                <p>Módulos de controle para gerenciamento de entradas, saídas e movimentações de insumos, otimizando o fluxo de caixa.</p>
+                <span class="badge-tech">Dashboard / BI</span>
+            </div>
+
+            <div class="card-projeto reveal-blur delay-4">
+                <div class="icon-projeto">🎬</div>
+                <h3>Edição de Vídeos Curtos</h3>
+                <p>Produção de vídeos dinâmicos, motion graphics e materiais visuais voltados para marketing digital e retenção nas redes sociais.</p>
+                <span class="badge-tech">Marketing / Motion</span>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="reveal-blur">
+        <div class="container">
+            <h3>Vamos impulsionar o seu negócio?</h3>
+            <p>Entre em contato para desenharmos a arquitetura ideal para o seu próximo projeto.</p>
+            <a href="https://wa.me/5519993405480" target="_blank" class="btn-contato" style="padding: 14px 28px; display: inline-block;">Fale Conosco no WhatsApp</a>
+            
+            <div class="animated-brand-wrapper" id="brandFormation">
+                <svg width="100%" height="100%" viewBox="0 0 350 50">
+                    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" class="brand-text-svg">
+                        <tspan class="svg-gp">GP Tech</tspan>
+                        <tspan class="svg-digital" dx="8">Digital</tspan>
+                    </text>
+                </svg>
+            </div>
+
+            <div class="copyright">
+                &copy; 2026 GP Tech Digital. Todos os direitos reservados.
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Observer 1: Para as seções normais (efeito blur) e Header Logo
+            const observerNormal = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -20px 0px', threshold: 0.1 });
+
+            // Anima os elementos com blur
+            document.querySelectorAll('.reveal-blur').forEach(el => observerNormal.observe(el));
+            
+            // Anima a logo do Header assim que a página carrega
+            const headerLogo = document.getElementById('headerLogo');
+            if(headerLogo) observerNormal.observe(headerLogo);
+
+            // Observer 2: Específico para o rodapé SVG (só anima quando descer a tela)
+            const observerSVG = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -20px 0px', threshold: 0.5 }); 
+
+            const brandWrapper = document.getElementById('brandFormation');
+            if(brandWrapper) observerSVG.observe(brandWrapper);
+        });
+    </script>
+</body>
+</html>
